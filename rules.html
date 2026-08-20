@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Normas del juego</title>
+
+<link rel="stylesheet" href="css<div class="welcome-container">
+
+<h1 class="game-title">
+📚 NORMAS DEL JUEGO
+</h1>
+
+<div id="playerInfo"></div>
+
+<br>
+
+<ul style="text-align:left;max-width:700px;margin:auto;font-size:1.1rem;line-height:2;">
+
+<li>Cada pregunta tiene 30 segundos.</li>
+
+<li>No podrás cambiar tu respuesta.</li>
+
+<li>Cada acierto suma puntos para tu equipo.</li>
+
+<li>La clasificación se actualizará tras cada pregunta.</li>
+
+<li>Gana el equipo con más puntos al final.</li>
+
+</ul>
+
+<button id="startGame" class="continue-btn">
+Comenzar partida
+</button>
+
+</div>
+
+<script>
+
+const player =
+localStorage.getItem("playerName");
+
+const team =
+localStorage.getItem("team");
+
+document.getElementById("playerInfo").innerHTML =
+
+`
+<h2>Jugador: ${player}</h2>
+<h3>Equipo: ${team}</h3>
+`;
+
+document
+.getElementById("startGame")
+.addEventListener("click",()=>{
+
+window.location.href="question.html";
+
+});
+
+</script>
+
+</body>
+
+</html>
