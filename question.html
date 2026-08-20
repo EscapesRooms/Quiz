@@ -36,6 +36,7 @@
         </div>
 
         <div id="answerStatus"></div>
+        <div id="resultBox" style="display:none;"></div>
 
     </div>
 
@@ -109,11 +110,28 @@
 
             time--;
 
-            if (time <= 0) {
+            if(time <= 0){
 
                 timer.textContent = "0";
-
+            
                 clearInterval(interval);
+            
+                buttons.forEach(btn => {
+            
+                    btn.disabled = true;
+            
+                });
+            
+                document.getElementById("resultBox").style.display =
+                "block";
+            
+                document.getElementById("resultBox").innerHTML =
+            
+                "✅ Respuesta correcta: <strong>" +
+                q.answers[q.correct] +
+                "</strong><br><br>" +
+                q.explanation;
+
 
                 setTimeout(() => {
 
