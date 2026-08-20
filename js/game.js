@@ -3,6 +3,7 @@ let selectedTeam = "";
 const teamButtons = document.querySelectorAll(".team");
 const continueBtn = document.getElementById("continueBtn");
 const selectedTeamText = document.getElementById("selectedTeam");
+const playerName = document.getElementById("playerName");
 
 teamButtons.forEach(button => {
 
@@ -11,20 +12,49 @@ teamButtons.forEach(button => {
         selectedTeam = button.dataset.team;
 
         selectedTeamText.innerHTML =
-            "Equipo seleccionado: <strong>" +
-            selectedTeam +
-            "</strong>";
+        "Equipo seleccionado: <strong>" +
+        selectedTeam +
+        "</strong>";
 
-        continueBtn.disabled = false;
-
-        localStorage.setItem("team", selectedTeam);
+        checkReady();
 
     });
 
 });
 
+playerName.addEventListener("input", checkReady);
+
+function checkReady(){
+
+    if(
+        playerName.value.trim() !== "" &&
+        selectedTeam !== ""
+    ){
+        continueBtn.disabled = false;
+    }
+    else{
+        continueBtn.disabled = true;
+    }
+
+}
+
 continueBtn.addEventListener("click", () => {
 
-    alert("Perfecto. Más adelante irá a la pantalla de reglas.");
+    localStorage.setItem(
+        "playerName",
+        playerName.value
+    );
+
+    localStorage.setItem(
+        "team",
+        selectedTeam
+    );
+
+    alert(
+        "Jugador: " +
+        playerName.value +
+        "\nEquipo: " +
+        selectedTeam
+    );
 
 });
