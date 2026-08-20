@@ -4,8 +4,9 @@ const questions = [
     category: "Historia",
     question: "¿En qué año llegó el hombre a la Luna?",
     answers: ["1965","1969","1975","1980"],
-    correct: 1
-},
+    correct: 1,
+    explanation: "La misión Apollo 11 llegó a la Luna en 1969."
+}
 
 {
     category: "Geografía",
