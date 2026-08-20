@@ -425,3 +425,12 @@ font-size:2rem;
     }
 
 }
+
+.answer:disabled{
+    cursor:not-allowed;
+}
+
+.selected{
+    border:6px solid white;
+    box-shadow:0 0 20px white;
+}
