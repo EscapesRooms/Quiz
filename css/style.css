@@ -1,3 +1,7 @@
+/* ==================================================
+   CONFIGURACIÓN GENERAL
+   ================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,14 +9,25 @@
 }
 
 body {
-    background: #111827;
+    background:
+    radial-gradient(circle at top left,#1e3a8a,#111827 40%),
+    radial-gradient(circle at bottom right,#0ea5e9,#111827 40%);
+
     color: white;
+
     font-family: Arial, sans-serif;
+
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+
+/* ==================================================
+   CONTENEDORES GENERALES
+   ================================================== */
 
 .welcome-container {
     width: 90%;
@@ -20,30 +35,108 @@ body {
     text-align: center;
 }
 
+.question-container {
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+}
+
+
+/* ==================================================
+   TÍTULOS
+   ================================================== */
+
 .game-title {
+
     font-size: 4rem;
+
     margin-bottom: 20px;
+
+    text-transform: uppercase;
+
+    text-shadow:
+    0 0 10px rgba(255,255,255,.3),
+    0 0 25px rgba(0,212,255,.5);
 }
 
 .description {
+
     margin-bottom: 40px;
+
     font-size: 1.2rem;
 }
 
+
+/* ==================================================
+   INPUT NOMBRE JUGADOR
+   ================================================== */
+
+.player-input {
+
+    width: 100%;
+    max-width: 500px;
+
+    padding: 16px;
+
+    margin: 25px auto;
+
+    display: block;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 1.1rem;
+
+    background: #1f2937;
+
+    color: white;
+}
+
+.player-input:focus {
+
+    outline: none;
+
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+
+/* ==================================================
+   EQUIPOS
+   ================================================== */
+
 .team-grid {
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns: repeat(2,1fr);
+
     gap: 15px;
+
     margin-top: 20px;
 }
 
 .team {
+
     border: none;
+
     padding: 25px;
+
     border-radius: 12px;
+
     color: white;
+
     font-size: 1.1rem;
+
     cursor: pointer;
+
+    transition: .3s ease;
+}
+
+.team:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.4);
 }
 
 .red {
@@ -63,374 +156,119 @@ body {
 }
 
 .selected-team {
+
     margin-top: 25px;
+
     font-size: 1.2rem;
 }
 
+
+/* ==================================================
+   BOTONES GENERALES
+   ================================================== */
+
 .continue-btn {
+
     margin-top: 25px;
+
     padding: 15px 40px;
+
     border: none;
+
     border-radius: 30px;
-    background: #00d4ff;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-.continue-btn:disabled {
-    opacity: 0.5;
-}
-
-.player-input{
-    width:100%;
-    max-width:500px;
-
-    padding:16px;
-
-    margin:25px auto;
-
-    display:block;
-
-    border:none;
-    border-radius:12px;
-
-    font-size:1.1rem;
-
-    background:#1f2937;
-    color:white;
-}
-
-.player-input:focus{
-    outline:none;
-    box-shadow:0 0 15px #00d4ff;
-}
-
-.rules-box{
-    max-width:700px;
-    margin:30px auto;
-    padding:30px;
-    border-radius:20px;
-    background:#1f2937;
-    text-align:left;
-}
-
-.rules-box p{
-    margin:15px 0;
-    font-size:1.1rem;
-}
-
-body{
-    background:
-    radial-gradient(circle at top left,#1e3a8a,#111827 40%),
-    radial-gradient(circle at bottom right,#0ea5e9,#111827 40%);
-}
-
-.game-title{
-    font-size:4rem;
-    margin-bottom:20px;
-    text-transform:uppercase;
-    text-shadow:
-    0 0 10px rgba(255,255,255,.3),
-    0 0 25px rgba(0,212,255,.5);
-}
-
-.team{
-    transition:.3s ease;
-}
-
-.team:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 25px rgba(0,0,0,.4);
-}
-
-.continue-btn{
-    color:white;
-    font-size:1rem;
-    background:linear-gradient(
+    background: linear-gradient(
         90deg,
         #06b6d4,
         #2563eb
     );
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
 }
 
-.continue-btn:hover{
-    transform:scale(1.05);
+.continue-btn:hover {
+
+    transform: scale(1.05);
 }
 
-@media(max-width:768px){
+.continue-btn:disabled {
 
-    .game-title{
-        font-size:2.5rem;
-    }
-
-    .team-grid{
-        grid-template-columns:1fr;
-    }
-
-    .team{
-        padding:20px;
-    }
-
+    opacity: 0.5;
 }
 
-.timer{
 
-width:120px;
-height:120px;
+/* ==================================================
+   REGLAS
+   ================================================== */
 
-border-radius:50%;
+.rules-box {
 
-background:#0ea5e9;
+    max-width: 700px;
 
-display:flex;
-justify-content:center;
-align-items:center;
+    margin: 30px auto;
 
-font-size:3rem;
-font-weight:bold;
+    padding: 30px;
 
-margin:0 auto 30px auto;
+    border-radius: 20px;
 
-box-shadow:
-0 0 25px rgba(14,165,233,.5);
+    background: #1f2937;
 
+    text-align: left;
 }
 
-.category{
+.rules-box p {
 
-display:inline-block;
+    margin: 15px 0;
 
-padding:10px 25px;
-
-background:#374151;
-
-border-radius:30px;
-
-margin-bottom:30px;
-
-font-weight:bold;
-
-letter-spacing:2px;
-
+    font-size: 1.1rem;
 }
 
-.question-title{
 
-font-size:2rem;
+/* ==================================================
+   PREGUNTAS
+   ================================================== */
 
-margin-bottom:40px;
+.timer {
 
+    width: 85px;
+    height: 85px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #0ea5e9;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    box-shadow:
+    0 0 25px rgba(14,165,233,.6);
 }
 
-.answers{
 
-display:grid;
+/* ==================================================
+   CATEGORÍA
+   ================================================== */
 
-grid-template-columns:
-repeat(2,1fr);
+.category {
 
-gap:20px;
+    display: inline-block;
 
-}
+    background: #1f2937;
 
-.answer{
+    padding: 8px 18px;
 
-border:none;
-
-padding:25px;
-
-font-size:1.2rem;
-
-border-radius:15px;
-
-cursor:pointer;
-
-color:white;
-
-transition:.3s;
-
-}
-
-.answer:hover{
-
-transform:scale(1.03);
-
-}
-
-@media(max-width:768px){
-
-.answers{
-
-grid-template-columns:1fr;
-
-}
-
-.question-title{
-
-font-size:1.5rem;
-
-}
-
-.timer{
-
-width:90px;
-height:90px;
-
-font-size:2rem;
-
-}
-
-}
-
-.question-container{
-    width:90%;
-    max-width:1200px;
-    text-align:center;
-}
-
-.timer{
-
-    width:140px;
-    height:140px;
-
-    margin:0 auto 30px;
-
-    border-radius:50%;
-
-    background:#0ea5e9;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:3rem;
-    font-weight:bold;
-
-    box-shadow:0 0 30px rgba(14,165,233,.6);
-
-}
-
-.category{
-
-    display:inline-block;
-
-    background:#1f2937;
-
-    padding:12px 30px;
-
-    border-radius:30px;
-
-    font-weight:bold;
-
-    margin-bottom:30px;
-
-}
-
-.question-title{
-
-    font-size:3rem;
-
-    margin-bottom:50px;
-
-    max-width:1000px;
-
-    margin-left:auto;
-    margin-right:auto;
-
-}
-
-.answers{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:25px;
-
-}
-
-.answer{
-
-    border:none;
-
-    min-height:140px;
-
-    font-size:2rem;
-
-    font-weight:bold;
-
-    color:white;
-
-    border-radius:20px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.answer:hover{
-
-    transform:scale(1.03);
-
-}
-
-.selected{
-
-    outline:6px solid white;
-
-    transform:scale(0.97);
-
-}
-
-#answerStatus{
-
-    margin-top:30px;
-
-    font-size:1.5rem;
-
-    font-weight:bold;
-
-}
-
-@media(max-width:768px){
-
-    .question-title{
-
-        font-size:2rem;
-
-    }
-
-    .answers{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .answer{
-
-        min-height:100px;
-
-        font-size:1.5rem;
-
-    }
-
-    .timer{
-
-        width:100px;
-        height:100px;
-
-        font-size:2rem;
-
-    }
-
-}
-
-.answer:disabled{
-    cursor:not-allowed;
-}
-
-.selected{
-    border:6px solid white;
-    box-shadow:0 0 20px white;
-}
+    border-radius: 25px;
