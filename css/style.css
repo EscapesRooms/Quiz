@@ -1,1 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    background: #111827;
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-container {
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+}
+
+.game-title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.description {
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.team {
+    border: none;
+    padding: 25px;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.red {
+    background: #d32f2f;
+}
+
+.yellow {
+    background: #f9a825;
+}
+
+.green {
+    background: #388e3c;
+}
+
+.blue {
+    background: #1976d2;
+}
+
+.selected-team {
+    margin-top: 25px;
+    font-size: 1.2rem;
+}
+
+.continue-btn {
+    margin-top: 25px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    background: #00d4ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.continue-btn:disabled {
+    opacity: 0.5;
+}
