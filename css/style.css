@@ -80,3 +80,27 @@ body {
 .continue-btn:disabled {
     opacity: 0.5;
 }
+
+.player-input{
+    width:100%;
+    max-width:500px;
+
+    padding:16px;
+
+    margin:25px auto;
+
+    display:block;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:1.1rem;
+
+    background:#1f2937;
+    color:white;
+}
+
+.player-input:focus{
+    outline:none;
+    box-shadow:0 0 15px #00d4ff;
+}
