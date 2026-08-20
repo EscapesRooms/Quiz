@@ -119,3 +119,56 @@ body {
     font-size:1.1rem;
 }
 
+body{
+    background:
+    radial-gradient(circle at top left,#1e3a8a,#111827 40%),
+    radial-gradient(circle at bottom right,#0ea5e9,#111827 40%);
+}
+
+.game-title{
+    font-size:4rem;
+    margin-bottom:20px;
+    text-transform:uppercase;
+    text-shadow:
+    0 0 10px rgba(255,255,255,.3),
+    0 0 25px rgba(0,212,255,.5);
+}
+
+.team{
+    transition:.3s ease;
+}
+
+.team:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+
+.continue-btn{
+    color:white;
+    font-size:1rem;
+    background:linear-gradient(
+        90deg,
+        #06b6d4,
+        #2563eb
+    );
+}
+
+.continue-btn:hover{
+    transform:scale(1.05);
+}
+
+@media(max-width:768px){
+
+    .game-title{
+        font-size:2.5rem;
+    }
+
+    .team-grid{
+        grid-template-columns:1fr;
+    }
+
+    .team{
+        padding:20px;
+    }
+
+}
