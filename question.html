@@ -69,6 +69,9 @@
 
         let answered = false;
 
+        // Guarda el índice de la respuesta elegida
+        let selectedAnswer = null;
+
         const buttons =
             document.querySelectorAll(".answer");
 
@@ -79,6 +82,8 @@
                 if (answered) return;
 
                 answered = true;
+                // Guardamos la respuesta elegida
+                selectedAnswer = index;
 
                 button.classList.add("selected");
 
@@ -119,7 +124,18 @@
                 buttons.forEach(btn => {
             
                     btn.disabled = true;
-            
+                    // Marca la respuesta correcta en verde
+                    buttons[q.correct].classList.add("correct");
+                    
+                    // Si el jugador respondió mal,
+                    // marcar su respuesta en rojo
+                    if(
+                        selectedAnswer !== null &&
+                        selectedAnswer !== q.correct
+                    ){
+                        buttons[selectedAnswer]
+                        .classList.add("wrong");
+                    }
                 });
             
                 document.getElementById("resultBox").style.display =
