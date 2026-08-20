@@ -481,4 +481,19 @@ body {
         font-size:.9rem;
     }
 
+/* ==================================================
+   JUGADORES
+   ================================================== */
+   
+   #playerScore{
+
+    margin-bottom:15px;
+
+    color:#4ade80;
+
+    font-weight:bold;
+
+    font-size:0.95rem;
+}
+
 }
