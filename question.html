@@ -16,9 +16,9 @@
         <div class="timer" id="timer">
             15
         </div>
+        <div id="questionCounter"></div>
 
-        <div class="category" id="category">
-        </div>
+        <div class="category" id="category"></div>
 
         <h1 class="question-title" id="question">
         </h1>
@@ -53,6 +53,9 @@
         }
 
         const q = questions[currentQuestion];
+
+        document.getElementById("questionCounter").innerHTML =
+        `Pregunta ${currentQuestion + 1} de ${questions.length}`;
 
         document.getElementById("category").textContent =
             q.category;
