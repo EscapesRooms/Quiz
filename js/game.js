@@ -50,11 +50,6 @@ continueBtn.addEventListener("click", () => {
         selectedTeam
     );
 
-    alert(
-        "Jugador: " +
-        playerName.value +
-        "\nEquipo: " +
-        selectedTeam
-    );
+    window.location.href = "rules.html";
 
 });
