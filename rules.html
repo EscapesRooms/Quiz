@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Normas del Juego</title>
 
-<title>Normas del juego</title>
+    css/style.css
+</head>
+<body>
 
-<link rel="stylesheet" href="css<div class="welcome-container">
+<div class="welcome-container">
 
-<h1 class="game-title">
-📚 NORMAS DEL JUEGO
-</h1>
+    <h1 class="game-title">
+        📋 NORMAS DEL JUEGO
+    </h1>
 
-<div id="playerInfo"></div>
+    <div id="playerInfo"></div>
 
-<br>
+    <div class="rules-box">
 
-<ul style="text-align:left;max-width:700px;margin:auto;font-size:1.1rem;line-height:2;">
+        <p>⏱ Cada pregunta tendrá 30 segundos.</p>
 
-<li>Cada pregunta tiene 30 segundos.</li>
+        <p>✅ Cada acierto suma puntos para tu equipo.</p>
 
-<li>No podrás cambiar tu respuesta.</li>
+        <p>❌ No podrás cambiar tu respuesta.</p>
 
-<li>Cada acierto suma puntos para tu equipo.</li>
+        <p>📊 Tras cada ronda se mostrarán las estadísticas.</p>
 
-<li>La clasificación se actualizará tras cada pregunta.</li>
+        <p>🏆 Gana el equipo con más puntos al finalizar.</p>
 
-<li>Gana el equipo con más puntos al final.</li>
+    </div>
 
-</ul>
-
-<button id="startGame" class="continue-btn">
-Comenzar partida
-</button>
+    <button id="startGame" class="continue-btn">
+        Comenzar partida
+    </button>
 
 </div>
 
@@ -45,23 +45,21 @@ localStorage.getItem("playerName");
 const team =
 localStorage.getItem("team");
 
-document.getElementById("playerInfo").innerHTML =
-
-`
-<h2>Jugador: ${player}</h2>
-<h3>Equipo: ${team}</h3>
+document.getElementById("playerInfo").innerHTML = `
+<h2>${player}</h2>
+<h3>Equipo ${team}</h3>
 `;
 
 document
 .getElementById("startGame")
 .addEventListener("click",()=>{
 
-window.location.href="question.html";
+    window.location.href=
+    "question.html";
 
 });
 
 </script>
 
 </body>
-
 </html>
