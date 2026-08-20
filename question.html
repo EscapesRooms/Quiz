@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Pregunta</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="welcome-container">
+
+<div class="timer">
+    30
+</div>
+
+<div class="category">
+    HISTORIA
+</div>
+
+<h2 class="question-title">
+¿En qué año llegó el hombre a la Luna?
+</h2>
+
+<div class="answers">
+
+<button class="answer red">
+1965
+</button>
+
+<button class="answer yellow">
+1969
+</button>
+
+<button class="answer green">
+1975
+</button>
+
+<button class="answer blue">
+1980
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let time = 30;
+
+const timer =
+document.querySelector(".timer");
+
+setInterval(()=>{
+
+time--;
+
+timer.textContent = time;
+
+},1000);
+
+</script>
+
+</body>
+
+</html>
