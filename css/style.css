@@ -104,3 +104,18 @@ body {
     outline:none;
     box-shadow:0 0 15px #00d4ff;
 }
+
+.rules-box{
+    max-width:700px;
+    margin:30px auto;
+    padding:30px;
+    border-radius:20px;
+    background:#1f2937;
+    text-align:left;
+}
+
+.rules-box p{
+    margin:15px 0;
+    font-size:1.1rem;
+}
+
