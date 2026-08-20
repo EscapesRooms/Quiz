@@ -51,26 +51,23 @@
 
 <script>
 
-let time = 30;
+let time = 15;
 let answered = false;
 
 const timer = document.getElementById("timer");
 
 const interval = setInterval(() => {
 
-    time--;
-
-    timer.textContent = time;
-
-    if(time <= 0){
-
+    if (time <= 0) {
         timer.textContent = "0";
-
         clearInterval(interval);
-
+        return;
     }
 
-},1000);
+    time--;
+    timer.textContent = time;
+
+}, 1000);
 
 document.querySelectorAll(".answer").forEach(button=>{
 
