@@ -17,31 +17,19 @@
         15
     </div>
 
-    <div class="category">
-        HISTORIA
-    </div>
+    <div class="category" id="category"></div>
 
-    <h1 class="question-title">
-        ¿En qué año llegó el hombre a la Luna?
-    </h1>
+    <h1 class="question-title" id="question"></h1>
 
     <div class="answers">
 
-        <button class="answer red">
-            1965
-        </button>
+    <button class="answer red" id="a0"></button>
 
-        <button class="answer yellow">
-            1969
-        </button>
+    <button class="answer yellow" id="a1"></button>
 
-        <button class="answer green">
-            1975
-        </button>
+    <button class="answer green" id="a2"></button>
 
-        <button class="answer blue">
-            1980
-        </button>
+    <button class="answer blue" id="a3"></button>
 
     </div>
 
@@ -86,7 +74,94 @@ document.querySelectorAll(".answer").forEach(button=>{
 
 });
 
-<script src="js/questions.js"></script></script>
+
+<script>
+
+let currentQuestion =
+parseInt(localStorage.getItem("currentQuestion")) || 0;
+
+let answered = false;
+
+const q = questions[currentQuestion];
+
+document.getElementById("category").textContent =
+q.category;
+
+document.getElementById("question").textContent =
+q.question;
+
+for(let i=0;i<4;i++){
+
+document.getElementById("a"+i).textContent =
+q.answers[i];
+
+}
+
+document.querySelectorAll(".answer")
+.forEach((button,index)=>{
+
+button.addEventListener("click",()=>{
+
+if(answered) return;
+
+answered = true;
+
+button.classList.add("selected");
+
+document
+.getElementById("answerStatus")
+.innerHTML =
+"✅ Respuesta enviada";
+
+});
+
+});
+
+
+let time = 15;
+
+const timer =
+document.getElementById("timer");
+
+const interval =
+setInterval(()=>{
+
+if(time <= 0){
+
+clearInterval(interval);
+
+setTimeout(()=>{
+
+currentQuestion++;
+
+localStorage.setItem(
+"currentQuestion",
+currentQuestion
+);
+
+if(currentQuestion < questions.length){
+
+window.location.reload();
+
+}else{
+
+alert("Juego finalizado");
+
+}
+
+},2000);
+
+return;
+
+}
+
+timer.textContent = time;
+
+time--;
+
+},1000);
+
+</script>
 
 </body>
 
