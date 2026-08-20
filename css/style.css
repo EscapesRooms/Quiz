@@ -315,25 +315,27 @@ body {
     gap: 12px;
 }
 
-.answer {
+.answer{
 
-    border: none;
+    border:none;
 
-    min-height: 80px;
+    min-height:80px;
 
-    padding: 12px;
+    padding:12px;
 
-    border-radius: 18px;
+    border-radius:18px;
 
-    color: white;
+    color:white;
 
-    font-size: 1.1rem;
+    font-size:1.15rem;
 
-    font-weight: bold;
+    font-weight:bold;
 
-    cursor: pointer;
+    cursor:pointer;
 
-    transition: .3s;
+    transition:.3s;
+
+    background:#374151;
 }
 
 .answer:hover {
