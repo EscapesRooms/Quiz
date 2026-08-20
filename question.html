@@ -2,68 +2,92 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta</title>
 
-<title>Pregunta</title>
-
-<link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<div class="welcome-container">
+<div class="question-container">
 
-<div class="timer">
-    30
-</div>
+    <div class="timer" id="timer">
+        30
+    </div>
 
-<div class="category">
-    HISTORIA
-</div>
+    <div class="category">
+        HISTORIA
+    </div>
 
-<h2 class="question-title">
-¿En qué año llegó el hombre a la Luna?
-</h2>
+    <h1 class="question-title">
+        ¿En qué año llegó el hombre a la Luna?
+    </h1>
 
-<div class="answers">
+    <div class="answers">
 
-<button class="answer red">
-1965
-</button>
+        <button class="answer red">
+            1965
+        </button>
 
-<button class="answer yellow">
-1969
-</button>
+        <button class="answer yellow">
+            1969
+        </button>
 
-<button class="answer green">
-1975
-</button>
+        <button class="answer green">
+            1975
+        </button>
 
-<button class="answer blue">
-1980
-</button>
+        <button class="answer blue">
+            1980
+        </button>
 
-</div>
+    </div>
+
+    <div id="answerStatus"></div>
 
 </div>
 
 <script>
 
 let time = 30;
+let answered = false;
 
-const timer =
-document.querySelector(".timer");
+const timer = document.getElementById("timer");
 
-setInterval(()=>{
+const interval = setInterval(() => {
 
-time--;
+    time--;
 
-timer.textContent = time;
+    timer.textContent = time;
+
+    if(time <= 0){
+
+        timer.textContent = "0";
+
+        clearInterval(interval);
+
+    }
 
 },1000);
+
+document.querySelectorAll(".answer").forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        if(answered) return;
+
+        answered = true;
+
+        button.classList.add("selected");
+
+        document.getElementById("answerStatus").innerHTML =
+        "✅ Respuesta enviada";
+
+    });
+
+});
 
 </script>
 
