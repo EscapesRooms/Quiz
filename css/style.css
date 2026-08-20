@@ -258,6 +258,18 @@ body {
     0 0 25px rgba(14,165,233,.6);
 }
 
+#questionCounter{
+
+    margin-bottom:10px;
+
+    font-size:0.9rem;
+
+    opacity:.85;
+
+    font-weight:bold;
+}
+
+
 
 /* ==================================================
    CATEGORÍA
