@@ -238,8 +238,8 @@ body {
 
 .timer {
 
-    width: 85px;
-    height: 85px;
+    width: 60px;
+    height: 60px;
 
     margin: 0 auto 15px;
 
@@ -251,7 +251,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    font-size: 2rem;
+    font-size: 1.4rem;
     font-weight: bold;
 
     box-shadow:
@@ -272,3 +272,175 @@ body {
     padding: 8px 18px;
 
     border-radius: 25px;
+
+    margin-bottom: 15px;
+
+    font-size: .9rem;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==================================================
+   TEXTO DE LA PREGUNTA
+   ================================================== */
+
+.question-title {
+
+    font-size: 1.15rem;
+
+    line-height: 1.35;
+
+    margin-bottom: 20px;
+
+    max-width: 850px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ==================================================
+   RESPUESTAS
+   ================================================== */
+
+.answers {
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 12px;
+}
+
+.answer {
+
+    border: none;
+
+    min-height: 80px;
+
+    padding: 12px;
+
+    border-radius: 18px;
+
+    color: white;
+
+    font-size: 1.1rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.answer:hover {
+
+    transform: scale(1.02);
+}
+
+
+/* ==================================================
+   RESPUESTA SELECCIONADA
+   ================================================== */
+
+.selected {
+
+    border: 5px solid white;
+
+    box-shadow: 0 0 20px white;
+}
+
+
+/* ==================================================
+   BOTONES DESACTIVADOS
+   ================================================== */
+
+.answer:disabled {
+
+    cursor: not-allowed;
+}
+
+
+/* ==================================================
+   MENSAJE RESPUESTA ENVIADA
+   ================================================== */
+
+#answerStatus {
+
+    margin-top: 15px;
+
+    font-size: 1.1rem;
+
+    font-weight: bold;
+}
+
+
+/* ==================================================
+   RESULTADO DE LA PREGUNTA
+   ================================================== */
+
+#resultBox {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    background: #1f2937;
+
+    border-radius: 15px;
+
+    font-size: 1rem;
+
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   RESPONSIVE MÓVIL
+   ================================================== */
+
+@media(max-width:768px){
+
+    .game-title{
+        font-size:2.5rem;
+    }
+
+    .team-grid{
+        grid-template-columns:1fr;
+    }
+
+    .team{
+        padding:20px;
+    }
+
+    .timer{
+        width:70px;
+        height:70px;
+        font-size:1.6rem;
+    }
+
+    .category{
+        font-size:.8rem;
+    }
+
+    .question-title{
+        font-size:1.3rem;
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
+    .answer{
+        min-height:65px;
+        font-size:1rem;
+    }
+
+    #resultBox{
+        font-size:.9rem;
+    }
+
+}
