@@ -78,9 +78,11 @@
         }
 
         let answered = false;
+        let pointAwarded = false; //proteccion extra para bucle de puntuacion
 
         // Guarda el índice de la respuesta elegida
         let selectedAnswer = null;
+        let pointAwarded = false;
 
         const buttons =
             document.querySelectorAll(".answer");
@@ -131,35 +133,41 @@
             
                 clearInterval(interval);
             
+                // Desactivar todos los botones
                 buttons.forEach(btn => {
             
                     btn.disabled = true;
-                    // Marca la respuesta correcta en verde
-                    if(
-                        selectedAnswer !== null &&
-                        selectedAnswer === q.correct
-                    ){
-
-                    score++;
-
-                    localStorage.setItem(
-                    "score",
-                    score
-                    );
-
-                    }
-                    buttons[q.correct].classList.add("correct");
-                    
-                    // Si el jugador respondió mal,
-                    // marcar su respuesta en rojo
-                    if(
-                        selectedAnswer !== null &&
-                        selectedAnswer !== q.correct
-                    ){
-                        buttons[selectedAnswer]
-                        .classList.add("wrong");
-                    }
+            
                 });
+            
+                // Si acierta suma 1 punto
+                if(
+                    selectedAnswer !== null &&
+                    selectedAnswer === q.correct
+                ){
+            
+                    score++;
+            
+                    localStorage.setItem(
+                        "score",
+                        score
+                    );
+            
+                }
+            
+                // Marcar correcta en verde
+                buttons[q.correct].classList.add("correct");
+            
+                // Marcar incorrecta en rojo
+                if(
+                    selectedAnswer !== null &&
+                    selectedAnswer !== q.correct
+                ){
+            
+                    buttons[selectedAnswer]
+                    .classList.add("wrong");
+            
+                }
             
                 document.getElementById("resultBox").style.display =
                 "block";
@@ -170,52 +178,51 @@
                 q.answers[q.correct] +
                 "</strong><br><br>" +
                 q.explanation;
-
-
+            
                 setTimeout(() => {
-
+            
                     currentQuestion++;
-
+            
                     localStorage.setItem(
                         "currentQuestion",
                         currentQuestion
                     );
-
+            
                     if (currentQuestion < questions.length) {
-
+            
                         location.reload();
-
+            
                     } else {
-
+            
                         document.body.innerHTML = `
-
+            
                         <div class="welcome-container">
-                        
-                        <h1 class="game-title">
-                        🏆 Juego finalizado
-                        </h1>
-                        
-                        <h2>
-                        Puntuación final: ${score}
-                        </h2>
-                        
-                        <p style="margin-top:20px;">
-                        Has acertado ${score} preguntas.
-                        </p>
-                        
+            
+                            <h1 class="game-title">
+                                🏆 Juego finalizado
+                            </h1>
+            
+                            <h2>
+                                Puntuación final: ${score}
+                            </h2>
+            
                         </div>
-                        
+            
                         `;
-
+            
                         localStorage.setItem(
                             "currentQuestion",
                             0
                         );
-
+            
+                        localStorage.setItem(
+                            "score",
+                            0
+                        );
                     }
-
+            
                 }, 5000);
-
+            
                 return;
             }
 
