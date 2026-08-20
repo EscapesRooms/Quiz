@@ -11,157 +11,144 @@
 
 <body>
 
-<div class="question-container">
+    <div class="question-container">
 
-    <div class="timer" id="timer">
-        15
+        <div class="timer" id="timer">
+            15
+        </div>
+
+        <div class="category" id="category">
+        </div>
+
+        <h1 class="question-title" id="question">
+        </h1>
+
+        <div class="answers">
+
+            <button class="answer red" id="a0"></button>
+
+            <button class="answer yellow" id="a1"></button>
+
+            <button class="answer green" id="a2"></button>
+
+            <button class="answer blue" id="a3"></button>
+
+        </div>
+
+        <div id="answerStatus"></div>
+
     </div>
 
-    <div class="category" id="category"></div>
+    <script src="js/questions.js"></script>
 
-    <h1 class="question-title" id="question"></h1>
+    <script>
 
-    <div class="answers">
+        let currentQuestion =
+            parseInt(localStorage.getItem("currentQuestion")) || 0;
 
-    <button class="answer red" id="a0"></button>
+        if (currentQuestion >= questions.length) {
+            currentQuestion = 0;
+            localStorage.setItem("currentQuestion", 0);
+        }
 
-    <button class="answer yellow" id="a1"></button>
+        const q = questions[currentQuestion];
 
-    <button class="answer green" id="a2"></button>
+        document.getElementById("category").textContent =
+            q.category;
 
-    <button class="answer blue" id="a3"></button>
+        document.getElementById("question").textContent =
+            q.question;
 
-    </div>
+        for (let i = 0; i < 4; i++) {
 
-    <div id="answerStatus"></div>
+            document.getElementById("a" + i).textContent =
+                q.answers[i];
 
-</div>
+        }
 
-<script>
+        let answered = false;
 
-let time = 15;
-let answered = false;
+        const buttons =
+            document.querySelectorAll(".answer");
 
-const timer = document.getElementById("timer");
+        buttons.forEach((button, index) => {
 
-const interval = setInterval(() => {
+            button.addEventListener("click", () => {
 
-    if (time <= 0) {
-        timer.textContent = "0";
-        clearInterval(interval);
-        return;
-    }
+                if (answered) return;
 
-    time--;
-    timer.textContent = time;
+                answered = true;
 
-}, 1000);
+                button.classList.add("selected");
 
-document.querySelectorAll(".answer").forEach(button=>{
+                buttons.forEach(btn => {
 
-    button.addEventListener("click",()=>{
+                    btn.disabled = true;
 
-        if(answered) return;
+                    if (btn !== button) {
+                        btn.style.opacity = "0.4";
+                    }
 
-        answered = true;
+                });
 
-        button.classList.add("selected");
+                document.getElementById("answerStatus").innerHTML =
+                    "✅ Respuesta enviada";
 
-        document.getElementById("answerStatus").innerHTML =
-        "✅ Respuesta enviada";
+            });
 
-    });
+        });
 
-});
+        let time = 15;
 
+        const timer =
+            document.getElementById("timer");
 
-<script>
+        timer.textContent = time;
 
-let currentQuestion =
-parseInt(localStorage.getItem("currentQuestion")) || 0;
+        const interval = setInterval(() => {
 
-let answered = false;
+            time--;
 
-const q = questions[currentQuestion];
+            if (time <= 0) {
 
-document.getElementById("category").textContent =
-q.category;
+                timer.textContent = "0";
 
-document.getElementById("question").textContent =
-q.question;
+                clearInterval(interval);
 
-for(let i=0;i<4;i++){
+                setTimeout(() => {
 
-document.getElementById("a"+i).textContent =
-q.answers[i];
+                    currentQuestion++;
 
-}
+                    localStorage.setItem(
+                        "currentQuestion",
+                        currentQuestion
+                    );
 
-document.querySelectorAll(".answer")
-.forEach((button,index)=>{
+                    if (currentQuestion < questions.length) {
 
-button.addEventListener("click",()=>{
+                        location.reload();
 
-if(answered) return;
+                    } else {
 
-answered = true;
+                        alert("🎉 Juego finalizado");
 
-button.classList.add("selected");
+                        localStorage.setItem(
+                            "currentQuestion",
+                            0
+                        );
 
-document
-.getElementById("answerStatus")
-.innerHTML =
-"✅ Respuesta enviada";
+                    }
 
-});
+                }, 2000);
 
-});
+                return;
+            }
 
+            timer.textContent = time;
 
-let time = 15;
+        }, 1000);
 
-const timer =
-document.getElementById("timer");
-
-const interval =
-setInterval(()=>{
-
-if(time <= 0){
-
-clearInterval(interval);
-
-setTimeout(()=>{
-
-currentQuestion++;
-
-localStorage.setItem(
-"currentQuestion",
-currentQuestion
-);
-
-if(currentQuestion < questions.length){
-
-window.location.reload();
-
-}else{
-
-alert("Juego finalizado");
-
-}
-
-},2000);
-
-return;
-
-}
-
-timer.textContent = time;
-
-time--;
-
-},1000);
-
-</script>
+    </script>
 
 </body>
 
