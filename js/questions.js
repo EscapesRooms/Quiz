@@ -1,9 +1,9 @@
 const questions = [
 
 {
-    category: "Geografía",
-    question: "¿Cuál es la capital de Canadá?",
-    answers: ["Toronto","Montreal","Ottawa","Vancouver"],
+    category: "Historia",
+    question: "¿En qué año llegó el hombre a la Luna?",
+    answers: ["1965","1969","1975","1980"],
     correct: 2,
     explanation: "La misión Apollo 11 llegó a la Luna en 1969."
 },
