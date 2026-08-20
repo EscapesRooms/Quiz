@@ -1,3 +1,4 @@
+const questions = [
 {
     category: "Historia",
     question: "¿Qué civilización construyó Machu Picchu?",
@@ -137,7 +138,7 @@
 {
     category: "Ciencia",
     question: "¿Cuál es la velocidad aproximada de la luz en el vacío?",
-    answers["300.000 km/s","150.000 km/s","3.000 km/s","3.000.000 km/s"],
+    answers: ["300.000 km/s","150.000 km/s","3.000 km/s","3.000.000 km/s"],
     correct: 0,
     explanation: "La velocidad de la luz es de aproximadamente 300.000 km/s."
 },
@@ -237,3 +238,4 @@
     correct: 2,
     explanation: "Una ronda estándar de golf consta de 18 hoyos."
 }
+];
