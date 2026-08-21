@@ -30,11 +30,13 @@ parseInt(
     localStorage.getItem("currentQuestion")
 ) || 0;
 
+
 // Recuperar puntuación
 const score =
 parseInt(
     localStorage.getItem("score")
 ) || 0;
+
 
 // Referencia al botón continuar
 const continueBtn =
@@ -70,6 +72,7 @@ if(currentQuestion > 0){
     ">
     💾 Partida guardada detectada
     </p>`;
+
 }
 
 
@@ -92,7 +95,7 @@ document
     );
 
     window.location.href =
-    "question.html";
+    "question-module.html";
 
 });
 
