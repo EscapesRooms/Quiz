@@ -392,7 +392,33 @@ const interval = setInterval(() => {
                         questions.length
                     ) * 100
                 );
-
+               /* ==========================================
+               RÉCORD PERSONAL
+               ========================================== */
+               
+               // Recuperar mejor puntuación histórica
+               let bestScore =
+               parseInt(
+                   localStorage.getItem("bestScore")
+               ) || 0;
+               
+               // Indicar si se ha batido el récord
+               let newRecord = false;
+               
+               // Si la puntuación actual es mejor
+               if(score > bestScore){
+               
+                   bestScore = score;
+               
+                   newRecord = true;
+               
+                   // Guardar nuevo récord
+                   localStorage.setItem(
+                       "bestScore",
+                       bestScore
+                   );
+               
+               }
 
                 /* ==========================================
                    PANTALLA FINAL
@@ -433,6 +459,11 @@ const interval = setInterval(() => {
                         <p>
                             🎯 Precisión:
                             ${accuracy}%
+                        </p>
+
+                        <p>
+                            🏆 Mejor puntuación:
+                            ${bestScore}
                         </p>
 
                         <br>
