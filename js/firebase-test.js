@@ -20,7 +20,7 @@ document
 .getElementById("testBtn")
 .addEventListener("click", async () => {
 
-    try{
+    try {
 
         await setDoc(
 
