@@ -22,24 +22,45 @@ document
 
     try {
 
+        /* ==========================================
+           CREAR ID ÚNICO
+           ========================================== */
+
+        const playerId =
+        crypto.randomUUID();
+
+
+        /* ==========================================
+           CREAR JUGADOR EN FIRESTORE
+           ========================================== */
+
         await setDoc(
 
             doc(
                 db,
                 "players",
-                "test"
+                playerId
             ),
 
             {
+                playerId: playerId,
                 playerName: "Carlos",
                 team: "Verde",
-                score: 10
+                score: 0
             }
 
         );
 
+
+        /* ==========================================
+           CONFIRMACIÓN
+           ========================================== */
+
         alert(
-            "Documento creado correctamente"
+
+            "Jugador creado:\n\n" +
+            playerId
+
         );
 
     }
@@ -48,7 +69,7 @@ document
         console.error(error);
 
         alert(
-            "Error creando documento"
+            "Error creando jugador"
         );
 
     }
