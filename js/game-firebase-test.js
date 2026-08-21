@@ -13,43 +13,44 @@ from "./player-service.js";
    ========================================== */
 
 document
-.getElementById("conti*ueBtn")
+.getElementById("continueBtn")
 .addEventListener(
-    "cl*ck",
+    "click",
     async () => {
 
-        tr*{
+        try{
 
-            // Crear un ID únic*
+            // Crear un ID único
             const playerId =
-    *       crypto.randomUUID();
+            crypto.randomUUID();
 
-     *      // Guardar jugador
-         *  await savePlayer(
+            // Guardar jugador
+            await savePlayer(
 
-             *  playerId,
-                "Carlo*",
+                playerId,
+                "Carlos",
                 "Verde",
-      *         0
+                0
 
             );
 
-      *     alert(
+            alert(
 
-                "Juga*or creado:\n\n" +
-                *layerId
+                "Jugador creado:\n\n" +
+                playerId
 
             );
 
-        }*        catch(error){
+        }
+        catch(error){
 
-           *console.error(error);
+            console.error(error);
 
-           *alert(
-                "Error guar*ando jugador"
+            alert(
+                "Error guardando jugador"
             );
 
-    *   }
+        }
 
     }
 );
