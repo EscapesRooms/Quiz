@@ -277,19 +277,29 @@ const interval = setInterval(() => {
             ).innerHTML =
 
             `
-            <h3 style="color:#4ade80;">
-                ✅ ¡CORRECTO!
-            </h3>
-
-            <p>
-                +1 punto
-            </p>
-
-            <br>
-
-            <p>
+            <div class="result-correct">
+            
+                <div class="result-title">
+                    ✅ ¡CORRECTO!
+                </div>
+            
+                <p>
+                    +1 punto
+                </p>
+            
+            </div>
+            
+            <div class="result-info">
+            
+                <strong>
+                    ℹ️ Información
+                </strong>
+            
+                <br><br>
+            
                 ${q.explanation}
-            </p>
+            
+            </div>
             `;
 
         }
@@ -300,25 +310,33 @@ const interval = setInterval(() => {
             ).innerHTML =
 
             `
-            <h3 style="color:#f87171;">
-                ❌ INCORRECTO
-            </h3>
-
-            <p>
-                La respuesta correcta era:
-            </p>
-
-            <p>
+            <div class="result-wrong">
+            
+                <div class="result-title">
+                    ❌ INCORRECTO
+                </div>
+            
+                <p>
+                    Respuesta correcta:
+                </p>
+            
                 <strong>
                     ✅ ${q.answers[q.correct]}
                 </strong>
-            </p>
-
-            <br>
-
-            <p>
+            
+            </div>
+            
+            <div class="result-info">
+            
+                <strong>
+                    ℹ️ Información
+                </strong>
+            
+                <br><br>
+            
                 ${q.explanation}
-            </p>
+            
+            </div>
             `;
 
         }
