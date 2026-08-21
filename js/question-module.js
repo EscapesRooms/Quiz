@@ -379,14 +379,11 @@ const interval = setInterval(() => {
                    ========================================== */
 
                 const playerName =
-                localStorage.getItem(
-                    "playerName"
-                );
-
+                localStorage.getItem("playerName");
                 const team =
-                localStorage.getItem(
-                    "team"
-                );
+                localStorage.getItem("team");
+                const playerId =
+                localStorage.getItem("playerId");
 
                 const hits = score;
 
