@@ -182,3 +182,30 @@ let currentQuestion =
             timer.textContent = time;
 
         }, 1000);
+
+/* ==========================================
+   GUARDAR PROGRESO AUTOMÁTICAMENTE
+   ========================================== */
+
+// Antes de cerrar la pestaña,
+// cambiar de página o recargar,
+// guardar la pregunta actual y la puntuación.
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        // Guardar pregunta actual
+        localStorage.setItem(
+            "currentQuestion",
+            currentQuestion
+        );
+
+        // Guardar puntuación
+        localStorage.setItem(
+            "score",
+            score
+        );
+
+    }
+);
