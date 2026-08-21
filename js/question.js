@@ -2,11 +2,11 @@ let currentQuestion =
    parseInt(localStorage.getItem("currentQuestion"))
    || 0;
       /* ==========================================
-         MODO DESARROLLO
+         PRINCIPIO MODO DESARROLLO
          ========================================== */
       
       // Poner true sólo para pruebas
-      const DEV_MODE = true;
+      const DEV_MODE = false;
       
       if(DEV_MODE){
       
@@ -14,6 +14,9 @@ let currentQuestion =
           questions.length - 1;
       
       }
+  /* ==========================================
+         FINAL MODO DESARROLLO
+         ========================================== */
         let score =
         parseInt(localStorage.getItem("score")) || 0;
 
