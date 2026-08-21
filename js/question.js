@@ -466,6 +466,27 @@ const interval = setInterval(() => {
                             ${bestScore}
                         </p>
 
+                        ${
+                            newRecord
+                            ?
+                        
+                            `
+                            <p style="
+                                color:#facc15;
+                                font-weight:bold;
+                                font-size:1.2rem;
+                                margin-top:20px;
+                            ">
+                                🎉 ¡NUEVO RÉCORD PERSONAL!
+                            </p>
+                            `
+                        
+                            :
+                        
+                            ""
+                        
+                        }
+
                         <br>
 
                         <h2>
