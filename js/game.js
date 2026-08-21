@@ -38,18 +38,26 @@ function checkReady(){
 
 }
 
+/* ==========================================
+   GUARDAR JUGADOR Y EQUIPO
+   ========================================== */
+
 continueBtn.addEventListener("click", () => {
 
+    // Guardar nombre del jugador
     localStorage.setItem(
         "playerName",
         playerName.value
     );
 
+    // Guardar equipo elegido
     localStorage.setItem(
         "team",
         selectedTeam
     );
 
-    window.location.href = "rules.html";
+    // Ir a la pantalla de normas
+    window.location.href =
+    "rules.html";
 
 });
