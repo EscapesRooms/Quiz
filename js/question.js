@@ -142,8 +142,6 @@ let currentQuestion =
                 document.getElementById("resultBox").style.display =
                 "block";
             
-                document.getElementById("resultBox").innerHTML =
-            
                                   /* ==========================================
                      MOSTRAR RESULTADO DE LA PREGUNTA
                      ========================================== */
