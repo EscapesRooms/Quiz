@@ -424,6 +424,34 @@ const interval = setInterval(() => {
                    );
                
                }
+                              /* ==========================================
+                  ACTUALIZAR PUNTUACIÓN EN FIRESTORE
+                  ========================================== */
+               
+               try{
+               
+                   await updatePlayerScore(
+               
+                       playerId,
+                       playerName,
+                       team,
+                       score
+               
+                   );
+               
+                   console.log(
+                       "Score actualizado en Firestore"
+                   );
+               
+               }
+               catch(error){
+               
+                   console.error(
+                       "Error actualizando score:",
+                       error
+                   );
+               
+               }
 
                 /* ==========================================
                    PANTALLA FINAL
