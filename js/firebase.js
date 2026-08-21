@@ -3,10 +3,11 @@
    ========================================== */
 
 import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+from *https://www.gstatic.com/firebasejs*12.2.1/firebase-app.js";
 
-import {
-    getFirestore
+import {*    getFirestore,
+    doc,
+    setDoc
 }
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
@@ -17,19 +18,18 @@ from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyBonaZQAH_5whKokDV8lnl2eP70WINPRTw",
+    a*iKey: "AIzaSyBonaZQAH_5whKokDV8lnl*eP70WINPRTw",
 
     authDomain:
-    "quiz-teams-414d7.firebaseapp.com",
+   *"quiz-teams-414d7.firebaseapp.com"*
 
     projectId:
-    "quiz-teams-414d7",
+    "quiz-teams-4*4d7",
 
     storageBucket:
-    "quiz-teams-414d7.firebasestorage.app",
-
+    "qui*-teams-414d7.firebasestorage.app",*
     messagingSenderId:
-    "834996635016",
+    "83499*635016",
 
     appId:
     "1:834996635016:web:c48a60c6643d27bb6c263d"
@@ -57,4 +57,8 @@ getFirestore(app);
    EXPORTAR OBJETOS
    ========================================== */
 
-export { db };
+export {
+    db,
+    doc,
+*   setDoc
+};
