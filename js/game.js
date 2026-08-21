@@ -43,7 +43,10 @@ localStorage.getItem("team");
 const savedPlayerInfo =
 document.getElementById("savedPlayerInfo");
 
-// Si existe un jugador guardado
+/* ==========================================
+   JUGADOR YA CONFIGURADO
+   ========================================== */
+
 if(savedPlayer && savedTeam){
 
     savedPlayerInfo.innerHTML = `
@@ -59,12 +62,31 @@ if(savedPlayer && savedTeam){
             </p>
 
             <p>
-                Ya existe un jugador configurado.
+                Jugador ya configurado
             </p>
 
         </div>
 
     `;
+
+    // Mostrar acciones disponibles
+    document
+    .getElementById("existingPlayerActions")
+    .style.display = "block";
+
+    // Ocultar selector de nombre
+    playerName.style.display = "none";
+
+    // Ocultar equipos
+    document
+    .querySelector(".team-grid")
+    .style.display = "none";
+
+    // Ocultar texto equipo seleccionado
+    selectedTeamText.style.display = "none";
+
+    // Ocultar botón continuar normal
+    continueBtn.style.display = "none";
 }
 
 
@@ -147,3 +169,63 @@ continueBtn.addEventListener("click", () => {
     "rules.html";
 
 });
+
+/* ==========================================
+   CONTINUAR CON JUGADOR EXISTENTE
+   ========================================== */
+
+const continueExistingPlayer =
+document.getElementById(
+    "continueExistingPlayer"
+);
+
+if(continueExistingPlayer){
+
+    continueExistingPlayer
+    .addEventListener("click",()=>{
+
+        window.location.href =
+        "rules.html";
+
+    });
+
+}
+
+/* ==========================================
+   CAMBIAR JUGADOR
+   ========================================== */
+
+const resetPlayerBtn =
+document.getElementById(
+    "resetPlayerBtn"
+);
+
+if(resetPlayerBtn){
+
+    resetPlayerBtn
+    .addEventListener("click",()=>{
+
+        // Borrar TODO
+        localStorage.removeItem(
+            "playerName"
+        );
+
+        localStorage.removeItem(
+            "team"
+        );
+
+        localStorage.removeItem(
+            "score"
+        );
+
+        localStorage.removeItem(
+            "currentQuestion"
+        );
+
+        // Recargar página
+        location.reload();
+
+    });
+
+}
+
