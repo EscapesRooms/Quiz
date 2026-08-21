@@ -1,19 +1,19 @@
-/* ==========================================
-   MODO DESARROLLO
-   ========================================== */
-
-// Poner true sólo para pruebas
-const DEV_MODE = true;
-
-if(DEV_MODE){
-
-    currentQuestion =
-    questions.length - 1;
-
-}
-
 let currentQuestion =
-            parseInt(localStorage.getItem("currentQuestion")) || 0;
+   parseInt(localStorage.getItem("currentQuestion"))
+   || 0;
+      /* ==========================================
+         MODO DESARROLLO
+         ========================================== */
+      
+      // Poner true sólo para pruebas
+      const DEV_MODE = true;
+      
+      if(DEV_MODE){
+      
+          currentQuestion =
+          questions.length - 1;
+      
+      }
         let score =
         parseInt(localStorage.getItem("score")) || 0;
 
