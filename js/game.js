@@ -4,7 +4,28 @@
 
 // Equipo seleccionado
 let selectedTeam = "";
+/* ==========================================
+   ID ÚNICO DEL JUGADOR
+   ========================================== */
 
+// Recuperar ID existente
+let playerId =
+localStorage.getItem(
+    "playerId"
+);
+
+// Si no existe crear uno
+if(!playerId){
+
+    playerId =
+    crypto.randomUUID();
+
+    localStorage.setItem(
+        "playerId",
+        playerId
+    );
+
+}
 
 /* ==========================================
    REFERENCIAS HTML
