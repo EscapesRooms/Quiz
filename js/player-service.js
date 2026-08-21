@@ -41,3 +41,35 @@ export async function savePlayer(
     );
 
 }
+
+/* ==========================================
+   ACTUALIZAR PUNTUACIÓN
+   ========================================== */
+
+export async function updatePlayerScore(
+
+    playerId,
+    playerName,
+    team,
+    score
+
+){
+
+    await setDoc(
+
+        doc(
+            db,
+            "players",
+            playerId
+        ),
+
+        {
+            playerId,
+            playerName,
+            team,
+            score
+        }
+
+    );
+
+}
