@@ -147,21 +147,80 @@ let currentQuestion =
             
                     } else {
             
+                                                /* ==========================================
+                           ESTADÍSTICAS FINALES
+                           ========================================== */
+                        
+                        // Recuperar datos del jugador
+                        const playerName =
+                        localStorage.getItem("playerName");
+                        
+                        const team =
+                        localStorage.getItem("team");
+                        
+                        // Número de aciertos
+                        const hits = score;
+                        
+                        // Número de fallos
+                        const fails =
+                        questions.length - score;
+                        
+                        // Porcentaje de acierto
+                        const accuracy =
+                        Math.round(
+                            (score / questions.length) * 100
+                        );
+                        
+                        
+                        /* ==========================================
+                           PANTALLA FINAL
+                           ========================================== */
+                        
                         document.body.innerHTML = `
-            
+                        
                         <div class="welcome-container">
-            
+                        
                             <h1 class="game-title">
-                                🏆 Juego finalizado
+                                🏆 JUEGO FINALIZADO
                             </h1>
-            
-                            <h2>
-                                Puntuación final: ${score}
-                            </h2>
-            
+                        
+                            <div class="rules-box">
+                        
+                                <h2>
+                                    👤 ${playerName}
+                                </h2>
+                        
+                                <p>
+                                    🏳️ Equipo: ${team}
+                                </p>
+                        
+                                <br>
+                        
+                                <p>
+                                    ✅ Aciertos: ${hits}
+                                </p>
+                        
+                                <p>
+                                    ❌ Fallos: ${fails}
+                                </p>
+                        
+                                <p>
+                                    🎯 Precisión: ${accuracy}%
+                                </p>
+                        
+                                <br>
+                        
+                                <h2>
+                                    🏆 Puntuación final:
+                                    ${score} puntos
+                                </h2>
+                        
+                            </div>
+                        
                         </div>
-            
+                        
                         `;
+
             
                         localStorage.setItem(
                             "currentQuestion",
