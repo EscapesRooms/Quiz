@@ -221,7 +221,7 @@ continueBtn.addEventListener(
 
             // Ir a normas
             window.location.href =
-            "rules.html";
+            "rules-module.html";
 
         }
         catch(error){
@@ -255,7 +255,7 @@ if(continueExistingPlayer){
     .addEventListener("click",()=>{
 
         window.location.href =
-        "rules.html";
+        "rules-module.html";
 
     });
 
