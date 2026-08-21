@@ -144,11 +144,64 @@ let currentQuestion =
             
                 document.getElementById("resultBox").innerHTML =
             
-                "✅ Respuesta correcta: <strong>" +
-                q.answers[q.correct] +
-                "</strong><br><br>" +
-                q.explanation;
-            
+                                  /* ==========================================
+                     MOSTRAR RESULTADO DE LA PREGUNTA
+                     ========================================== */
+                  
+                  // Si el jugador ha acertado
+                  if(
+                      selectedAnswer !== null &&
+                      selectedAnswer === q.correct
+                  ){
+                  
+                      document.getElementById("resultBox").innerHTML =
+                  
+                      `
+                      <h3 style="color:#4ade80;">
+                          ✅ ¡CORRECTO!
+                      </h3>
+                  
+                      <p>
+                          +1 punto
+                      </p>
+                  
+                      <br>
+                  
+                      <p>
+                          ${q.explanation}
+                      </p>
+                      `;
+                  
+                  }
+                  else{
+                  
+                      // Si ha fallado o no ha respondido
+                  
+                      document.getElementById("resultBox").innerHTML =
+                  
+                      `
+                      <h3 style="color:#f87171;">
+                          ❌ INCORRECTO
+                      </h3>
+                  
+                      <p>
+                          La respuesta correcta era:
+                      </p>
+                  
+                      <p>
+                          <strong>
+                              ✅ ${q.answers[q.correct]}
+                          </strong>
+                      </p>
+                  
+                      <br>
+                  
+                      <p>
+                          ${q.explanation}
+                      </p>
+                      `;
+                  
+                  }
                 setTimeout(() => {
             
                     currentQuestion++;
