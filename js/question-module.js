@@ -22,7 +22,7 @@ parseInt(
    ========================================== */
 
 // Poner true sólo para pruebas
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 if(DEV_MODE){
 
