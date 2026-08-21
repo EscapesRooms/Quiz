@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Battle</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="welcome-container">
+
+        <h1 class="game-title">
+            QUIZ BATTLE
+        </h1>
+        <div id="savedPlayerInfo"></div>
+        <!-- Opciones para jugador ya configurado -->
+        <div id="existingPlayerActions"
+             style="display:none;">
+        
+            <button id="continueExistingPlayer"
+                    class="continue-btn">
+        
+                ▶ Continuar como este jugador
+        
+            </button>
+        
+            <button id="resetPlayerBtn"
+                    class="continue-btn">
+        
+                🔄 Cambiar jugador y equipo
+        
+            </button>
+        
+        </div>
+
+        <p class="description">
+            Demuestra tus conocimientos y ayuda a tu equipo a conseguir la victoria.
+        </p>
+
+        <input
+            type="text"
+            id="playerName"
+            placeholder="Introduce tu nombre"
+            class="player-input"
+        />
+
+        <h2>Selecciona tu equipo</h2>
+
+        <div class="team-grid">
+
+            <button class="team red" data-team="Rojo">
+                🔴 Equipo Rojo
+            </button>
+
+            <button class="team yellow" data-team="Amarillo">
+                🟡 Equipo Amarillo
+            </button>
+
+            <button class="team green" data-team="Verde">
+                🟢 Equipo Verde
+            </button>
+
+            <button class="team blue" data-team="Azul">
+                🔵 Equipo Azul
+            </button>
+
+        </div>
+
+        <div id="selectedTeam" class="selected-team">
+            Ningún equipo seleccionado
+        </div>
+
+        <button id="continueBtn" class="continue-btn" disabled>
+            Continuar
+        </button>
+
+    </div>
+
+    <script type="module" src="js/game-module-real.js"></script>
+
+</body>
+
+</html>
