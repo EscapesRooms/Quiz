@@ -1,15 +1,4 @@
-﻿function shuffleArray(items) {
-    const array = [...items];
-
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-
-    return array;
-}
-
-const allQuestions = [
+﻿const allQuestions = [
     {
         category: "El Quiz de la Guarra",
         question: "¿Cuál es la comida favorita de Júlia?",
@@ -42,7 +31,7 @@ const allQuestions = [
         category: "El Quiz de la Guarra",
         question: "¿Cuál es su color favorito?",
         answers: ["Amarillo", "Rojo", "Verde", "Azul"],
-        correct: 1,
+        correct: 0,
         explanation: "."
     },
     {
@@ -82,5 +71,5 @@ const allQuestions = [
     }
 ];
 
-export const questions = shuffleArray(allQuestions);
+export const questions = allQuestions;
 window.questions = questions;
