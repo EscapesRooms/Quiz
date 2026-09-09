@@ -10,14 +10,21 @@ localStorage.getItem("playerName");
 const team =
 localStorage.getItem("team");
 
-// Mostrar jugador y equipo
-document.getElementById("playerInfo").innerHTML = `
+// Mostrar jugador y equipo si existe el contenedor
+const playerInfo =
+document.getElementById("playerInfo");
 
-    <h2>${player}</h2>
+if(playerInfo){
 
-    <h3>Equipo ${team}</h3>
+    playerInfo.innerHTML = `
 
-`;
+        <h2>${player}</h2>
+
+        <h3>Equipo ${team}</h3>
+
+    `;
+
+}
 
 
 /* ==========================================
@@ -38,7 +45,7 @@ parseInt(
 ) || 0;
 
 
-// Referencia al botón continuar
+// Referencia al botón continuar si existe
 const continueBtn =
 document.getElementById(
     "continueGameBtn"
@@ -49,7 +56,7 @@ document.getElementById(
    PARTIDA GUARDADA
    ========================================== */
 
-if(currentQuestion > 0){
+if(currentQuestion > 0 && continueBtn){
 
     continueBtn.style.display =
     "inline-block";
@@ -62,16 +69,21 @@ if(currentQuestion > 0){
     <br>
     Puntos: ${score}`;
 
-    document.getElementById(
-        "saveInfo"
-    ).innerHTML =
+    const saveInfo =
+    document.getElementById("saveInfo");
 
-    `<p style="
-    margin-bottom:20px;
-    color:#4ade80;
-    ">
-    💾 Partida guardada detectada
-    </p>`;
+    if(saveInfo){
+
+        saveInfo.innerHTML =
+
+        `<p style="
+        margin-bottom:20px;
+        color:#4ade80;
+        ">
+        💾 Partida guardada detectada
+        </p>`;
+
+    }
 
 }
 
@@ -80,35 +92,44 @@ if(currentQuestion > 0){
    NUEVA PARTIDA
    ========================================== */
 
-document
-.getElementById("newGameBtn")
-.addEventListener("click",()=>{
+const newGameBtn =
+document.getElementById("newGameBtn");
 
-    localStorage.setItem(
-        "currentQuestion",
-        0
-    );
+if(newGameBtn){
 
-    localStorage.setItem(
-        "score",
-        0
-    );
+    newGameBtn
+    .addEventListener("click",()=>{
 
-    window.location.href =
-    "question-module.html";
+        localStorage.setItem(
+            "currentQuestion",
+            0
+        );
 
-});
+        localStorage.setItem(
+            "score",
+            0
+        );
+
+        window.location.href =
+        "question-module.html";
+
+    });
+
+}
 
 
 /* ==========================================
    CONTINUAR PARTIDA
    ========================================== */
 
-document
-.getElementById("continueGameBtn")
-.addEventListener("click",()=>{
+if(continueBtn){
 
-    window.location.href =
-    "question-module.html";
+    continueBtn
+    .addEventListener("click",()=>{
 
-});
+        window.location.href =
+        "question-module.html";
+
+    });
+
+}
