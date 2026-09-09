@@ -72,6 +72,110 @@ for (let i = 0; i < 4; i++) {
 let answered = false;
 let selectedAnswer = null;
 const buttons = document.querySelectorAll(".answer");
+const nextQuestionBtn = document.getElementById("nextQuestionBtn");
+
+function goToNextQuestion() {
+    currentQuestion += 1;
+    localStorage.setItem("currentQuestion", String(currentQuestion));
+
+    if (currentQuestion < questions.length) {
+        location.reload();
+        return;
+    }
+
+    const playerName = localStorage.getItem("playerName") || "Jugador";
+    const team = localStorage.getItem("team") || "General";
+    const playerId = localStorage.getItem("playerId") || "unknown";
+
+    const hits = score;
+    const fails = questions.length - score;
+    const accuracy = Math.round((score / questions.length) * 100);
+
+    let bestScore = parseInt(localStorage.getItem("bestScore"), 10) || 0;
+    let newRecord = false;
+
+    if (score > bestScore) {
+        bestScore = score;
+        newRecord = true;
+        localStorage.setItem("bestScore", String(bestScore));
+    }
+
+    document.body.innerHTML = `
+        <div class="welcome-container">
+            <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
+            <div class="rules-box">
+                <h2>👤 ${playerName}</h2>
+                <p>🏳️ Equipo: ${team}</p>
+                <br>
+                <p>✅ Aciertos: ${hits}</p>
+                <p>❌ Fallos: ${fails}</p>
+                <p>🎯 Precisión: ${accuracy}%</p>
+                <p>🏆 Mejor puntuación: ${bestScore}</p>
+                ${
+                    newRecord
+                        ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">🎉 ¡NUEVO RÉCORD PERSONAL!</p>`
+                        : ""
+                }
+                <br>
+                <h2>🏆 Puntuación final: ${score} puntos</h2>
+            </div>
+        </div>
+    `;
+
+    localStorage.setItem("currentQuestion", "0");
+    localStorage.setItem("score", "0");
+}
+
+nextQuestionBtn.addEventListener("click", async () => {
+    const playerName = localStorage.getItem("playerName") || "Jugador";
+    const team = localStorage.getItem("team") || "General";
+    const playerId = localStorage.getItem("playerId") || "unknown";
+
+    if (currentQuestion >= questions.length - 1) {
+        let bestScore = parseInt(localStorage.getItem("bestScore"), 10) || 0;
+        let newRecord = false;
+
+        if (score > bestScore) {
+            bestScore = score;
+            newRecord = true;
+            localStorage.setItem("bestScore", String(bestScore));
+        }
+
+        try {
+            await updatePlayerScore(playerId, playerName, team, score);
+        } catch (error) {
+            console.error("Error actualizando score:", error);
+        }
+
+        document.body.innerHTML = `
+            <div class="welcome-container">
+                <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
+                <div class="rules-box">
+                    <h2>👤 ${playerName}</h2>
+                    <p>🏳️ Equipo: ${team}</p>
+                    <br>
+                    <p>✅ Aciertos: ${score}</p>
+                    <p>❌ Fallos: ${questions.length - score}</p>
+                    <p>🎯 Precisión: ${Math.round((score / questions.length) * 100)}%</p>
+                    <p>🏆 Mejor puntuación: ${bestScore}</p>
+                    ${
+                        newRecord
+                            ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">🎉 ¡NUEVO RÉCORD PERSONAL!</p>`
+                            : ""
+                    }
+                    <br>
+                    <h2>🏆 Puntuación final: ${score} puntos</h2>
+                </div>
+            </div>
+        `;
+
+        localStorage.setItem("currentQuestion", "0");
+        localStorage.setItem("score", "0");
+        return;
+    }
+
+    goToNextQuestion();
+});
 
 buttons.forEach((button, index) => {
     button.addEventListener("click", async () => {
@@ -104,6 +208,7 @@ buttons.forEach((button, index) => {
         }
 
         document.getElementById("resultBox").style.display = "block";
+        nextQuestionBtn.style.display = "block";
 
         if (selectedAnswer === q.correct) {
             document.getElementById("resultBox").innerHTML = `
@@ -132,63 +237,6 @@ buttons.forEach((button, index) => {
             `;
         }
 
-        setTimeout(async () => {
-            currentQuestion += 1;
-            localStorage.setItem("currentQuestion", String(currentQuestion));
-
-            if (currentQuestion < questions.length) {
-                location.reload();
-                return;
-            }
-
-            const playerName = localStorage.getItem("playerName") || "Jugador";
-            const team = localStorage.getItem("team") || "General";
-            const playerId = localStorage.getItem("playerId") || "unknown";
-
-            const hits = score;
-            const fails = questions.length - score;
-            const accuracy = Math.round((score / questions.length) * 100);
-
-            let bestScore = parseInt(localStorage.getItem("bestScore"), 10) || 0;
-            let newRecord = false;
-
-            if (score > bestScore) {
-                bestScore = score;
-                newRecord = true;
-                localStorage.setItem("bestScore", String(bestScore));
-            }
-
-            try {
-                await updatePlayerScore(playerId, playerName, team, score);
-            } catch (error) {
-                console.error("Error actualizando score:", error);
-            }
-
-            document.body.innerHTML = `
-                <div class="welcome-container">
-                    <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
-                    <div class="rules-box">
-                        <h2>👤 ${playerName}</h2>
-                        <p>🏳️ Equipo: ${team}</p>
-                        <br>
-                        <p>✅ Aciertos: ${hits}</p>
-                        <p>❌ Fallos: ${fails}</p>
-                        <p>🎯 Precisión: ${accuracy}%</p>
-                        <p>🏆 Mejor puntuación: ${bestScore}</p>
-                        ${
-                            newRecord
-                                ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">🎉 ¡NUEVO RÉCORD PERSONAL!</p>`
-                                : ""
-                        }
-                        <br>
-                        <h2>🏆 Puntuación final: ${score} puntos</h2>
-                    </div>
-                </div>
-            `;
-
-            localStorage.setItem("currentQuestion", "0");
-            localStorage.setItem("score", "0");
-        }, 1500);
     });
 });
 
