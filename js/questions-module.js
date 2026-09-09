@@ -11,74 +11,74 @@
 
 const allQuestions = [
     {
-        category: "Persona",
-        question: "¿Cuál es la comida favorita de esta persona?",
+        category: "El Quiz de la Guarra",
+        question: "¿Cuál es la comida favorita de Júlia?",
         answers: ["Pizza", "Sushi", "Tacos", "Paella"],
-        correct: 0,
-        explanation: "La pizza suele ser una elección muy típica cuando se habla de comida favorita en un perfil general."
-    },
-    {
-        category: "Persona",
-        question: "¿Qué tipo de música suele escuchar esta persona?",
-        answers: ["Rock", "Reggaeton", "Jazz", "Clásica"],
         correct: 1,
-        explanation: "En muchos perfiles, el reggaeton es una opción muy popular por su energía y ritmo."
+        explanation: "."
     },
     {
-        category: "Persona",
-        question: "¿Cuál es su actividad favorita en su tiempo libre?",
-        answers: ["Salir con amigos", "Leer", "Hacer deporte", "Ver series"],
+        category: "El Quiz de la Guarra",
+        question: "¿Cuál es su DJ favorito/a?",
+        answers: ["Nico Moreno", "Paul Kalkbrenner", "Amelie Lens", "Nova"],
         correct: 2,
-        explanation: "La actividad más habitual de mucha gente suele ser hacer deporte como forma de desconectar."
+        explanation: "."
     },
     {
-        category: "Persona",
-        question: "¿Qué lugar suele elegir para relajarse?",
-        answers: ["La playa", "La montaña", "Un centro comercial", "El trabajo"],
+        category: "El Quiz de la Guarra",
+        question: "¿Cuál es el ultimo tatuaje que se ha hecho?",
+        answers: ["Superpirriki", "Juguito de chocho", "Snitch Harry Potter", "Wine"],
+        correct: 3,
+        explanation: "."
+    },
+    {
+        category: "El Quiz de la Guarra",
+        question: "¿Cuál es su nombre budista?",
+        answers: ["Maya", "Prajna", "Ghala", "Manjari"],
+        correct: 2,
+        explanation: "."
+    },
+    {
+        category: "El Quiz de la Guarra",
+        question: "¿Cuál es su color favorito?",
+        answers: ["Amarillo", "Rojo", "Verde", "Azul"],
         correct: 1,
-        explanation: "La montaña suele asociarse con calma, paz y desconexión, por eso es una respuesta muy frecuente."
+        explanation: "."
     },
     {
-        category: "Persona",
-        question: "¿Qué suele hacer cuando está nerviosa?",
-        answers: ["Se pone a cantar", "Empieza a morderse las uñas", "Se queda quieta", "Se va a dormir"],
+        category: "El Quiz de la Guarra",
+        question: "¿Cuantos tatuajes tiene?",
+        answers: ["entre 5 y 10", "Entre 10 y 20", "Entre 20 y 30", "Entre 30 y 40"],
+        correct: 2,
+        explanation: "."
+    },
+    {
+        category: "El Quiz de la Guarra",
+        question: "¿Último viaje que ha hecho con las madrastras de cenicienta (Lore y Xona)?",
+        answers: ["Lisboa", "Turín", "Oporto", "Pais Vasco"],
+        correct: 2,
+        explanation: "."
+    },
+    {
+        category: "El Quiz de la Guarra",
+        question: "¿Qué talla de pie tiene?",
+        answers: ["35", "35,5", "36", "36,5"],
         correct: 1,
-        explanation: "Morderse las uñas es un gesto muy típico cuando alguien está nervioso o ansioso."
+        explanation: "."
     },
     {
-        category: "Persona",
-        question: "¿Qué tipo de película suele gustarle más?",
-        answers: ["Comedia", "Terror", "Documental", "Acción"],
-        correct: 0,
-        explanation: "Las comedias suelen ser una respuesta muy común porque son agradables y fáciles de disfrutar."
-    },
-    {
-        category: "Persona",
-        question: "¿Qué tipo de viaje le encanta más?",
-        answers: ["De playa", "De aventura", "De ciudad", "De trabajo"],
+        category: "El Quiz de la Guarra",
+        question: "¿Nombres de su padre y de su hermano?",
+        answers: ["Joan y Joaquin", "Ricard y Marc", "Pep y Josep", "Luis y Xavi"],
         correct: 1,
-        explanation: "Los viajes de aventura suelen ser muy populares porque ofrecen experiencias nuevas y emocionantes."
+        explanation: "."
     },
     {
-        category: "Persona",
-        question: "¿Qué animal le parece más adorable?",
-        answers: ["Perro", "Tiburón", "Cocodrilo", "Araña"],
-        correct: 0,
-        explanation: "Los perros son una de las opciones más comunes en preguntas sobre animales adorables."
-    },
-    {
-        category: "Persona",
-        question: "¿Qué suele decir cuando quiere animarte?",
-        answers: ["¡Tú puedes!", "¡Vamos a dormir!", "¡No te preocupes, no importa!", "¡Eso está mal!"],
-        correct: 0,
-        explanation: "“¡Tú puedes!” es una frase muy típica para motivar a otra persona."
-    },
-    {
-        category: "Persona",
-        question: "¿Cuál es su mayor sueño o meta?",
-        answers: ["Viajar por el mundo", "Trabajar sin descanso", "Odiar cambiar", "No tener metas"],
-        correct: 0,
-        explanation: "Viajar por el mundo es una meta muy representativa de personas que buscan experiencias y libertad."
+        category: "El Quiz de la Guarra",
+        question: "¿Último color de pelo que ha tenido?",
+        answers: ["Rosa", "Rojo", "Azúl", "Blanco"],
+        correct: 3,
+        explanation: "."
     }
 ];
 
