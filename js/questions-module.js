@@ -58,7 +58,7 @@
     {
         category: "El Quiz de la Guarra",
         question: "¿Nombres de su padre y de su hermano?",
-        answers: ["Joan y Joaquin", "Ricard y Marc", "Pep y Josep", "Luis y Xavi"],
+        answers: ["Joan y Quim", "Ricard y Marc", "Pep y Josep", "Lluis y Xavi"],
         correct: 1,
         explanation: "."
     },
