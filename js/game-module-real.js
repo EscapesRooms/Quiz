@@ -122,6 +122,9 @@ function checkReady(){
 
 }
 
+// Ejecutar validación inicial para casos con valor ya rellenado
+checkReady();
+
 
 /* ==========================================
    GUARDAR JUGADOR Y EQUIPO
