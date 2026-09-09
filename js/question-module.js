@@ -178,57 +178,12 @@ buttons.forEach((button,index) => {
 
         "✅ Respuesta enviada";
 
-    });
-
-});
-
-
-/* ==========================================
-   TEMPORIZADOR
-   ========================================== */
-
-let time = 15;
-
-const timer =
-document.getElementById(
-    "timer"
-);
-
-timer.textContent = time;
-
-
-/* ==========================================
-   CUENTA ATRÁS
-   ========================================== */
-
-const interval = setInterval(() => {
-
-    time--;
-
-    if(time <= 0){
-
-        timer.textContent = "0";
-
-        clearInterval(interval);
-
-
-        /* ==========================================
-           DESACTIVAR RESPUESTAS
-           ========================================== */
-
-        buttons.forEach(btn => {
-
-            btn.disabled = true;
-
-        });
-
 
         /* ==========================================
            SUMAR PUNTOS
            ========================================== */
 
         if(
-            selectedAnswer !== null &&
             selectedAnswer === q.correct
         ){
 
@@ -238,6 +193,12 @@ const interval = setInterval(() => {
                 "score",
                 score
             );
+
+            document.getElementById(
+                "playerScore"
+            ).innerHTML =
+
+            `Puntos: ${score}`;
 
         }
 
@@ -253,7 +214,6 @@ const interval = setInterval(() => {
 
         // Incorrecta elegida en rojo
         if(
-            selectedAnswer !== null &&
             selectedAnswer !== q.correct
         ){
 
@@ -276,7 +236,6 @@ const interval = setInterval(() => {
 
         // Si el jugador ha acertado
         if(
-            selectedAnswer !== null &&
             selectedAnswer === q.correct
         ){
 
@@ -554,10 +513,6 @@ const interval = setInterval(() => {
         return;
 
     }
-
-    timer.textContent = time;
-
-}, 1000);
 
 
 /* ==========================================

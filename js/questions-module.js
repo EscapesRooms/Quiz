@@ -1,81 +1,83 @@
-﻿window.questions = [
-{
-    category: "Historia",
-    question: "¿Qué civilización construyó Machu Picchu?",
-    answers: ["Azteca","Maya","Inca","Olmeca"],
-    correct: 2,
-    explanation: "Machu Picchu fue construido por el Imperio Inca en el siglo XV."
-},
+﻿function shuffleArray(items) {
+    const array = [...items];
 
-{
-    category: "Ciencia",
-    question: "¿Qué elemento químico tiene el símbolo Ag?",
-    answers: ["Oro","Argón","Plata","Aluminio"],
-    correct: 2,
-    explanation: "Ag proviene del latín Argentum, nombre de la plata."
-},
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 
-{
-    category: "Geografía",
-    question: "¿Cuál es el único país que limita con Portugal?",
-    answers: ["Francia","Andorra","España","Italia"],
-    correct: 2,
-    explanation: "Portugal comparte toda su frontera terrestre con España."
-},
-
-{
-    category: "Tecnología",
-    question: "¿En qué año se lanzó Windows 95?",
-    answers: ["1993","1995","1998","2000"],
-    correct: 1,
-    explanation: "Windows 95 fue lanzado por Microsoft el 24 de agosto de 1995."
-},
-
-{
-    category: "Música",
-    question: "¿Qué grupo publicó el álbum 'The Dark Side of the Moon'?",
-    answers: ["Queen","Pink Floyd","Genesis","Dire Straits"],
-    correct: 1,
-    explanation: "Pink Floyd lanzó este álbum en 1973."
-},
-
-{
-    category: "Deportes",
-    question: "¿Qué país ganó el Mundial de fútbol de 2010?",
-    answers: ["Alemania","Brasil","Argentina","España"],
-    correct: 3,
-    explanation: "España ganó a Países Bajos en la final disputada en Sudáfrica."
-},
-
-{
-    category: "Cine",
-    question: "¿Quién dirigió la trilogía original de El Señor de los Anillos?",
-    answers: ["James Cameron","Peter Jackson","Steven Spielberg","Ridley Scott"],
-    correct: 1,
-    explanation: "Peter Jackson dirigió la famosa trilogía basada en la obra de Tolkien."
-},
-
-{
-    category: "Historia",
-    question: "¿Qué batalla marcó la derrota definitiva de Napoleón?",
-    answers: ["Austerlitz","Trafalgar","Waterloo","Leipzig"],
-    correct: 2,
-    explanation: "Napoleón fue derrotado definitivamente en Waterloo en 1815."
-},
-
-{
-    category: "Geografía",
-    question: "¿Cuál es la capital de Nueva Zelanda?",
-    answers: ["Auckland","Christchurch","Wellington","Hamilton"],
-    correct: 2,
-    explanation: "Wellington es la capital del país."
-},
-
-{
-    category: "Tecnología",
-    question: "¿Qué significa SSD en informática?",
-    answers: ["Solid State Drive","Super Speed Disk","System Storage Device","Secure System Drive"],
-    correct: 0,
-    explanation: "SSD significa Solid State Drive."
+    return array;
 }
-];
+
+window.questions = shuffleArray([
+    {
+        category: "Persona",
+        question: "¿Cuál es la comida favorita de esta persona?",
+        answers: ["Pizza", "Sushi", "Tacos", "Paella"],
+        correct: 0,
+        explanation: "La pizza suele ser una elección muy típica cuando se habla de comida favorita en un perfil general."
+    },
+    {
+        category: "Persona",
+        question: "¿Qué tipo de música suele escuchar esta persona?",
+        answers: ["Rock", "Reggaeton", "Jazz", "Clásica"],
+        correct: 1,
+        explanation: "En muchos perfiles, el reggaeton es una opción muy popular por su energía y ritmo."
+    },
+    {
+        category: "Persona",
+        question: "¿Cuál es su actividad favorita en su tiempo libre?",
+        answers: ["Salir con amigos", "Leer", "Hacer deporte", "Ver series"],
+        correct: 2,
+        explanation: "La actividad más habitual de mucha gente suele ser hacer deporte como forma de desconectar."
+    },
+    {
+        category: "Persona",
+        question: "¿Qué lugar suele elegir para relajarse?",
+        answers: ["La playa", "La montaña", "Un centro comercial", "El trabajo"],
+        correct: 1,
+        explanation: "La montaña suele asociarse con calma, paz y desconexión, por eso es una respuesta muy frecuente."
+    },
+    {
+        category: "Persona",
+        question: "¿Qué suele hacer cuando está nerviosa?",
+        answers: ["Se pone a cantar", "Empieza a morderse las uñas", "Se queda quieta", "Se va a dormir"],
+        correct: 1,
+        explanation: "Morderse las uñas es un gesto muy típico cuando alguien está nervioso o ansioso."
+    },
+    {
+        category: "Persona",
+        question: "¿Qué tipo de película suele gustarle más?",
+        answers: ["Comedia", "Terror", "Documental", "Acción"],
+        correct: 0,
+        explanation: "Las comedias suelen ser una respuesta muy común porque son agradables y fáciles de disfrutar."
+    },
+    {
+        category: "Persona",
+        question: "¿Qué tipo de viaje le encanta más?",
+        answers: ["De playa", "De aventura", "De ciudad", "De trabajo"],
+        correct: 1,
+        explanation: "Los viajes de aventura suelen ser muy populares porque ofrecen experiencias nuevas y emocionantes."
+    },
+    {
+        category: "Persona",
+        question: "¿Qué animal le parece más adorable?",
+        answers: ["Perro", "Tiburón", "Cocodrilo", "Araña"],
+        correct: 0,
+        explanation: "Los perros son una de las opciones más comunes en preguntas sobre animales adorables."
+    },
+    {
+        category: "Persona",
+        question: "¿Qué suele decir cuando quiere animarte?",
+        answers: ["¡Tú puedes!", "¡Vamos a dormir!", "¡No te preocupes, no importa!", "¡Eso está mal!"],
+        correct: 0,
+        explanation: "“¡Tú puedes!” es una frase muy típica para motivar a otra persona."
+    },
+    {
+        category: "Persona",
+        question: "¿Cuál es su mayor sueño o meta?",
+        answers: ["Viajar por el mundo", "Trabajar sin descanso", "Odiar cambiar", "No tener metas"],
+        correct: 0,
+        explanation: "Viajar por el mundo es una meta muy representativa de personas que buscan experiencias y libertad."
+    }
+]);
