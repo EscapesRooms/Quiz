@@ -100,6 +100,10 @@ function goToNextQuestion() {
         localStorage.setItem("bestScore", String(bestScore));
     }
 
+    const finalMessage = score >= 10
+        ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">Has ganado un chupito con la cumpleañera, ves a pedirselo</p>`
+        : `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">Lo sentimos, tomate el chupito solo</p>`;
+
     document.body.innerHTML = `
         <div class="welcome-container">
             <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
@@ -111,11 +115,7 @@ function goToNextQuestion() {
                 <p>❌ Fallos: ${fails}</p>
                 <p>🎯 Precisión: ${accuracy}%</p>
                 <p>🏆 Mejor puntuación: ${bestScore}</p>
-                ${
-                    newRecord
-                        ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">🎉 ¡NUEVO RÉCORD PERSONAL!</p>`
-                        : ""
-                }
+                ${finalMessage}
                 <br>
                 <h2>🏆 Puntuación final: ${score} puntos</h2>
             </div>
@@ -147,6 +147,10 @@ nextQuestionBtn.addEventListener("click", async () => {
             console.error("Error actualizando score:", error);
         }
 
+        const finalMessage = score >= 10
+            ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">Has ganado un chupito con la cumpleañera, ves a pedirselo</p>`
+            : `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">Lo sentimos, tomate el chupito solo</p>`;
+
         document.body.innerHTML = `
             <div class="welcome-container">
                 <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
@@ -158,11 +162,7 @@ nextQuestionBtn.addEventListener("click", async () => {
                     <p>❌ Fallos: ${questions.length - score}</p>
                     <p>🎯 Precisión: ${Math.round((score / questions.length) * 100)}%</p>
                     <p>🏆 Mejor puntuación: ${bestScore}</p>
-                    ${
-                        newRecord
-                            ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">🎉 ¡NUEVO RÉCORD PERSONAL!</p>`
-                            : ""
-                    }
+                    ${finalMessage}
                     <br>
                     <h2>🏆 Puntuación final: ${score} puntos</h2>
                 </div>
