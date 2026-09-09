@@ -5,7 +5,11 @@
 import {
     db,
     doc,
-    setDoc
+    setDoc,
+    collection,
+    getDocs,
+    query,
+    orderBy
 }
 from "./firebase.js";
 
@@ -67,9 +71,40 @@ export async function updatePlayerScore(
             playerId,
             playerName,
             team,
-            score
+            score,
+            updatedAt: new Date().toISOString()
         }
 
+    );
+
+}
+
+/* ==========================================
+   OBTENER RANKING
+   ========================================== */
+
+export async function getPlayersRanking(){
+
+    const playersRef =
+    collection(
+        db,
+        "players"
+    );
+
+    const rankingQuery =
+    query(
+        playersRef,
+        orderBy("score", "desc")
+    );
+
+    const snapshot =
+    await getDocs(rankingQuery);
+
+    return snapshot.docs.map(
+        item => ({
+            id: item.id,
+            ...item.data()
+        })
     );
 
 }

@@ -11,8 +11,6 @@ from "./player-service.js";
    VARIABLES
    ========================================== */
 
-// Equipo seleccionado
-let selectedTeam = "";
 /* ==========================================
    ID ÚNICO DEL JUGADOR
    ========================================== */
@@ -40,17 +38,9 @@ if(!playerId){
    REFERENCIAS HTML
    ========================================== */
 
-// Botones de equipos
-const teamButtons =
-document.querySelectorAll(".team");
-
 // Botón continuar
 const continueBtn =
 document.getElementById("continueBtn");
-
-// Texto del equipo seleccionado
-const selectedTeamText =
-document.getElementById("selectedTeam");
 
 // Campo nombre jugador
 const playerName =
@@ -65,10 +55,6 @@ document.getElementById("playerName");
 const savedPlayer =
 localStorage.getItem("playerName");
 
-// Recuperar equipo guardado
-const savedTeam =
-localStorage.getItem("team");
-
 // Zona donde mostraremos la información
 const savedPlayerInfo =
 document.getElementById("savedPlayerInfo");
@@ -77,7 +63,7 @@ document.getElementById("savedPlayerInfo");
    JUGADOR YA CONFIGURADO
    ========================================== */
 
-if(savedPlayer && savedTeam){
+if(savedPlayer){
 
     savedPlayerInfo.innerHTML = `
 
@@ -86,10 +72,6 @@ if(savedPlayer && savedTeam){
             <h2>
                 👤 ${savedPlayer}
             </h2>
-
-            <p>
-                Equipo ${savedTeam}
-            </p>
 
             <p>
                 Jugador ya configurado
@@ -107,43 +89,9 @@ if(savedPlayer && savedTeam){
     // Ocultar selector de nombre
     playerName.style.display = "none";
 
-    // Ocultar equipos
-    document
-    .querySelector(".team-grid")
-    .style.display = "none";
-
-    // Ocultar texto equipo seleccionado
-    selectedTeamText.style.display = "none";
-
     // Ocultar botón continuar normal
     continueBtn.style.display = "none";
 }
-
-
-/* ==========================================
-   SELECCIÓN DE EQUIPO
-   ========================================== */
-
-teamButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        // Guardar equipo seleccionado
-        selectedTeam =
-        button.dataset.team;
-
-        // Mostrar equipo en pantalla
-        selectedTeamText.innerHTML =
-        "Equipo seleccionado: <strong>" +
-        selectedTeam +
-        "</strong>";
-
-        // Comprobar si puede continuar
-        checkReady();
-
-    });
-
-});
 
 
 /* ==========================================
@@ -160,8 +108,7 @@ playerName.addEventListener(
 function checkReady(){
 
     if(
-        playerName.value.trim() !== "" &&
-        selectedTeam !== ""
+        playerName.value.trim() !== ""
     ){
 
         continueBtn.disabled = false;
@@ -190,16 +137,23 @@ continueBtn.addEventListener(
 
         try{
 
+            const playerNameValue =
+            playerName.value.trim();
+
+            if(!playerNameValue){
+                return;
+            }
+
             // Guardar nombre localmente
             localStorage.setItem(
                 "playerName",
-                playerName.value
+                playerNameValue
             );
 
-            // Guardar equipo localmente
+            // Guardar equipo localmente como valor por defecto
             localStorage.setItem(
                 "team",
-                selectedTeam
+                "General"
             );
 
             /* ==========================================
@@ -209,8 +163,8 @@ continueBtn.addEventListener(
             await savePlayer(
 
                 playerId,
-                playerName.value,
-                selectedTeam,
+                playerNameValue,
+                "General",
                 0
 
             );

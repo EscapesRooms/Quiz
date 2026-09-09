@@ -1,1 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking Quiz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 32px;
+        }
 
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.85);
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .refresh-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+            text-align: left;
+        }
+
+        th {
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(148, 163, 184, 0.06);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 28px;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>🏆 Ranking del Quiz</h1>
+
+        <div class="toolbar">
+            <p>Últimas puntuaciones registradas en la base de datos.</p>
+            <button id="refreshBtn" class="refresh-btn">🔄 Recargar</button>
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display:none;">
+            Todavía no hay puntuaciones guardadas.
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Jugador</th>
+                    <th>Equipo</th>
+                    <th>Puntuación</th>
+                    <th>Última actualización</th>
+                </tr>
+            </thead>
+            <tbody id="rankingList"></tbody>
+        </table>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
