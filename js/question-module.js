@@ -1,580 +1,202 @@
-/* ==========================================
+﻿/* ==========================================
    IMPORTAR SERVICIO DE JUGADORES
    ========================================== */
 
 import {
     updatePlayerScore
-}
-from "./player-service.js";
+} from "./player-service.js";
 
 import {
     questions
-}
-from "./questions-module.js";
+} from "./questions-module.js";
 
 /* ==========================================
-   PREGUNTA ACTUAL
+   VARIABLES DE ESTADO
    ========================================== */
 
-// Recuperar pregunta guardada
-let currentQuestion =
-parseInt(
-    localStorage.getItem("currentQuestion")
-) || 0;
-
-
-/* ==========================================
-   MODO DESARROLLO
-   ========================================== */
-
-// Poner true sólo para pruebas
 const DEV_MODE = false;
 
-if(DEV_MODE){
+let currentQuestion = parseInt(localStorage.getItem("currentQuestion"), 10) || 0;
+let score = parseInt(localStorage.getItem("score"), 10) || 0;
 
-    // Saltar directamente
-    // a la última pregunta
-    currentQuestion =
-    questions.length - 1;
-
+if (DEV_MODE && questions.length > 0) {
+    currentQuestion = questions.length - 1;
 }
 
-
 /* ==========================================
-   PUNTUACIÓN
+   VALIDAR PREGUNTAS
    ========================================== */
 
-// Recuperar puntuación actual
-let score =
-parseInt(
-    localStorage.getItem("score")
-) || 0;
-
-
-/* ==========================================
-   VALIDAR PREGUNTA
-   ========================================== */
-
-if(questions.length === 0){
-
+if (!questions || questions.length === 0) {
     document.body.innerHTML = `
-
         <div class="welcome-container">
-
-            <h1 class="game-title">
-                ⚠️ Quiz sin preguntas
-            </h1>
-
+            <h1 class="game-title">⚠️ Quiz sin preguntas</h1>
             <div class="rules-box">
-
-                <p>
-                    No se han cargado las preguntas.
-                </p>
-
-                <p>
-                    Revisa el archivo <strong>js/questions-module.js</strong>
-                    y asegúrate de que exista la lista de preguntas.
-                </p>
-
+                <p>No se han cargado las preguntas.</p>
+                <p>Revisa el archivo <strong>js/questions-module.js</strong> y asegúrate de que exista la lista de preguntas.</p>
             </div>
-
         </div>
     `;
 
     throw new Error("No hay preguntas cargadas");
-
 }
 
-if(currentQuestion >= questions.length){
-
+if (currentQuestion >= questions.length) {
     currentQuestion = 0;
-
-    localStorage.setItem(
-        "currentQuestion",
-        0
-    );
-
+    localStorage.setItem("currentQuestion", "0");
 }
-
 
 /* ==========================================
-   CARGAR PREGUNTA
+   CARGAR PREGUNTA ACTUAL
    ========================================== */
 
-const q =
-questions[currentQuestion];
-
+const q = questions[currentQuestion];
 
 /* ==========================================
    MOSTRAR INFORMACIÓN
    ========================================== */
 
-// Mostrar número de pregunta
-document.getElementById(
-    "questionCounter"
-).innerHTML =
+document.getElementById("questionCounter").innerHTML = `Pregunta ${currentQuestion + 1} de ${questions.length}`;
+document.getElementById("playerScore").innerHTML = `Puntos: ${score}`;
+document.getElementById("category").textContent = q.category;
+document.getElementById("question").textContent = q.question;
 
-`Pregunta ${currentQuestion + 1}
-de ${questions.length}`;
-
-
-
-// Mostrar puntuación
-document.getElementById(
-    "playerScore"
-).innerHTML =
-
-`Puntos: ${score}`;
-
-
-// Mostrar categoría
-document.getElementById(
-    "category"
-).textContent =
-
-q.category;
-
-
-// Mostrar pregunta
-document.getElementById(
-    "question"
-).textContent =
-
-q.question;
-
-
-// Mostrar respuestas
-for(let i = 0; i < 4; i++){
-
-    document.getElementById(
-        "a" + i
-    ).textContent =
-
-    q.answers[i];
-
+for (let i = 0; i < 4; i++) {
+    document.getElementById("a" + i).textContent = q.answers[i];
 }
-
 
 /* ==========================================
    CONTROL DE RESPUESTA
    ========================================== */
 
 let answered = false;
-
-// Índice de la respuesta elegida
 let selectedAnswer = null;
+const buttons = document.querySelectorAll(".answer");
 
-
-// Botones de respuesta
-const buttons =
-document.querySelectorAll(
-    ".answer"
-);
-
-
-/* ==========================================
-   EVENTOS DE RESPUESTA
-   ========================================== */
-
-buttons.forEach((button,index) => {
-
-    button.addEventListener("click",() => {
-
-        // Evitar responder dos veces
-        if(answered) return;
+buttons.forEach((button, index) => {
+    button.addEventListener("click", async () => {
+        if (answered) return;
 
         answered = true;
-
-        // Guardar respuesta elegida
         selectedAnswer = index;
 
-        // Resaltar respuesta
-        button.classList.add(
-            "selected"
-        );
+        button.classList.add("selected");
 
-        // Desactivar el resto
-        buttons.forEach(btn => {
-
+        buttons.forEach((btn) => {
             btn.disabled = true;
-
-            if(btn !== button){
-
-                btn.style.opacity =
-                "0.4";
-
+            if (btn !== button) {
+                btn.style.opacity = "0.4";
             }
-
         });
 
-        // Mensaje informativo
-        document.getElementById(
-            "answerStatus"
-        ).innerHTML =
+        document.getElementById("answerStatus").innerHTML = "✅ Respuesta enviada";
 
-        "✅ Respuesta enviada";
-
-
-        /* ==========================================
-           SUMAR PUNTOS
-           ========================================== */
-
-        if(
-            selectedAnswer === q.correct
-        ){
-
-            score++;
-
-            localStorage.setItem(
-                "score",
-                score
-            );
-
-            document.getElementById(
-                "playerScore"
-            ).innerHTML =
-
-            `Puntos: ${score}`;
-
+        if (selectedAnswer === q.correct) {
+            score += 1;
+            localStorage.setItem("score", String(score));
+            document.getElementById("playerScore").innerHTML = `Puntos: ${score}`;
         }
 
+        buttons[q.correct].classList.add("correct");
 
-        /* ==========================================
-           MARCAR RESPUESTAS
-           ========================================== */
-
-        // Correcta en verde
-        buttons[q.correct]
-        .classList.add("correct");
-
-
-        // Incorrecta elegida en rojo
-        if(
-            selectedAnswer !== q.correct
-        ){
-
-            buttons[selectedAnswer]
-            .classList.add("wrong");
-
+        if (selectedAnswer !== q.correct) {
+            buttons[selectedAnswer].classList.add("wrong");
         }
 
+        document.getElementById("resultBox").style.display = "block";
 
-        /* ==========================================
-           MOSTRAR RESULTADO
-           ========================================== */
-
-        document.getElementById(
-            "resultBox"
-        ).style.display =
-
-        "block";
-
-
-        // Si el jugador ha acertado
-        if(
-            selectedAnswer === q.correct
-        ){
-
-            document.getElementById(
-                "resultBox"
-            ).innerHTML =
-
-            `
-            <div class="result-correct">
-            
-                <div class="result-title">
-                    ✅ ¡CORRECTO!
+        if (selectedAnswer === q.correct) {
+            document.getElementById("resultBox").innerHTML = `
+                <div class="result-correct">
+                    <div class="result-title">✅ ¡CORRECTO!</div>
+                    <p>+1 punto</p>
                 </div>
-            
-                <p>
-                    +1 punto
-                </p>
-            
-            </div>
-            
-            <div class="result-info">
-            
-                <strong>
-                    ℹ️ Información
-                </strong>
-            
-                <br><br>
-            
-                ${q.explanation}
-            
-            </div>
-            `;
-
-        }
-        else{
-
-            document.getElementById(
-                "resultBox"
-            ).innerHTML =
-
-            `
-            <div class="result-wrong">
-            
-                <div class="result-title">
-                    ❌ INCORRECTO
+                <div class="result-info">
+                    <strong>ℹ️ Información</strong>
+                    <br><br>
+                    ${q.explanation}
                 </div>
-            
-                <p>
-                    Respuesta correcta:
-                </p>
-            
-                <strong>
-                    ✅ ${q.answers[q.correct]}
-                </strong>
-            
-            </div>
-            
-            <div class="result-info">
-            
-                <strong>
-                    ℹ️ Información
-                </strong>
-            
-                <br><br>
-            
-                ${q.explanation}
-            
-            </div>
             `;
-
+        } else {
+            document.getElementById("resultBox").innerHTML = `
+                <div class="result-wrong">
+                    <div class="result-title">❌ INCORRECTO</div>
+                    <p>Respuesta correcta:</p>
+                    <strong>✅ ${q.answers[q.correct]}</strong>
+                </div>
+                <div class="result-info">
+                    <strong>ℹ️ Información</strong>
+                    <br><br>
+                    ${q.explanation}
+                </div>
+            `;
         }
-
-
-        /* ==========================================
-           SIGUIENTE PREGUNTA
-           ========================================== */
 
         setTimeout(async () => {
+            currentQuestion += 1;
+            localStorage.setItem("currentQuestion", String(currentQuestion));
 
-            currentQuestion++;
-
-            localStorage.setItem(
-                "currentQuestion",
-                currentQuestion
-            );
-
-
-            if(
-                currentQuestion <
-                questions.length
-            ){
-
+            if (currentQuestion < questions.length) {
                 location.reload();
-
+                return;
             }
-            else{
 
-                /* ==========================================
-                   ESTADÍSTICAS FINALES
-                   ========================================== */
+            const playerName = localStorage.getItem("playerName") || "Jugador";
+            const team = localStorage.getItem("team") || "General";
+            const playerId = localStorage.getItem("playerId") || "unknown";
 
-                const playerName =
-                localStorage.getItem("playerName");
-                const team =
-                localStorage.getItem("team");
-                const playerId =
-                localStorage.getItem("playerId");
+            const hits = score;
+            const fails = questions.length - score;
+            const accuracy = Math.round((score / questions.length) * 100);
 
-                const hits = score;
+            let bestScore = parseInt(localStorage.getItem("bestScore"), 10) || 0;
+            let newRecord = false;
 
-                const fails =
-                questions.length - score;
+            if (score > bestScore) {
+                bestScore = score;
+                newRecord = true;
+                localStorage.setItem("bestScore", String(bestScore));
+            }
 
-                const accuracy =
-                Math.round(
-                    (
-                        score /
-                        questions.length
-                    ) * 100
-                );
-               /* ==========================================
-               RÉCORD PERSONAL
-               ========================================== */
-               
-               // Recuperar mejor puntuación histórica
-               let bestScore =
-               parseInt(
-                   localStorage.getItem("bestScore")
-               ) || 0;
-               
-               // Indicar si se ha batido el récord
-               let newRecord = false;
-               
-               // Si la puntuación actual es mejor
-               if(score > bestScore){
-               
-                   bestScore = score;
-               
-                   newRecord = true;
-               
-                   // Guardar nuevo récord
-                   localStorage.setItem(
-                       "bestScore",
-                       bestScore
-                   );
-               
-               }
-                              /* ==========================================
-                  ACTUALIZAR PUNTUACIÓN EN FIRESTORE
-                  ========================================== */
-               
-               try{
-               
-                   await updatePlayerScore(
-               
-                       playerId,
-                       playerName,
-                       team,
-                       score
-               
-                   );
-               
-                   console.log(
-                       "Score actualizado en Firestore"
-                   );
-               
-               }
-               catch(error){
-               
-                   console.error(
-                       "Error actualizando score:",
-                       error
-                   );
-               
-               }
+            try {
+                await updatePlayerScore(playerId, playerName, team, score);
+            } catch (error) {
+                console.error("Error actualizando score:", error);
+            }
 
-                /* ==========================================
-                   PANTALLA FINAL
-                   ========================================== */
-
-                document.body.innerHTML =
-
-                `
+            document.body.innerHTML = `
                 <div class="welcome-container">
-
-                    <h1 class="game-title">
-                        🏆 JUEGO FINALIZADO
-                    </h1>
-
+                    <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
                     <div class="rules-box">
-
-                        <h2>
-                            👤 ${playerName}
-                        </h2>
-
-                        <p>
-                            🏳️ Equipo:
-                            ${team}
-                        </p>
-
+                        <h2>👤 ${playerName}</h2>
+                        <p>🏳️ Equipo: ${team}</p>
                         <br>
-
-                        <p>
-                            ✅ Aciertos:
-                            ${hits}
-                        </p>
-
-                        <p>
-                            ❌ Fallos:
-                            ${fails}
-                        </p>
-
-                        <p>
-                            🎯 Precisión:
-                            ${accuracy}%
-                        </p>
-
-                        <p>
-                            🏆 Mejor puntuación:
-                            ${bestScore}
-                        </p>
-
+                        <p>✅ Aciertos: ${hits}</p>
+                        <p>❌ Fallos: ${fails}</p>
+                        <p>🎯 Precisión: ${accuracy}%</p>
+                        <p>🏆 Mejor puntuación: ${bestScore}</p>
                         ${
                             newRecord
-                            ?
-                        
-                            `
-                            <p style="
-                                color:#facc15;
-                                font-weight:bold;
-                                font-size:1.2rem;
-                                margin-top:20px;
-                            ">
-                                🎉 ¡NUEVO RÉCORD PERSONAL!
-                            </p>
-                            `
-                        
-                            :
-                        
-                            ""
-                        
+                                ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">🎉 ¡NUEVO RÉCORD PERSONAL!</p>`
+                                : ""
                         }
-
                         <br>
-
-                        <h2>
-                            🏆 Puntuación final:
-                            ${score} puntos
-                        </h2>
-
+                        <h2>🏆 Puntuación final: ${score} puntos</h2>
                     </div>
-
                 </div>
-                `;
+            `;
 
-
-                /* ==========================================
-                   REINICIAR PARTIDA
-                   ========================================== */
-
-                localStorage.setItem(
-                    "currentQuestion",
-                    0
-                );
-
-                localStorage.setItem(
-                    "score",
-                    0
-                );
-
-            }
-
-        }, 5000);
-
-        return;
-
-    }
-
+            localStorage.setItem("currentQuestion", "0");
+            localStorage.setItem("score", "0");
+        }, 1500);
+    });
+});
 
 /* ==========================================
    GUARDAR PROGRESO AUTOMÁTICAMENTE
    ========================================== */
 
-// Antes de cerrar la pestaña,
-// cambiar de página o recargar,
-// guardar pregunta y puntuación
-
-window.addEventListener(
-
-    "beforeunload",
-
-    () => {
-
-        localStorage.setItem(
-            "currentQuestion",
-            currentQuestion
-        );
-
-        localStorage.setItem(
-            "score",
-            score
-        );
-
-    }
-
-);
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem("currentQuestion", String(currentQuestion));
+    localStorage.setItem("score", String(score));
+});

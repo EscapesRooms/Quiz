@@ -83,3 +83,4 @@ const allQuestions = [
 ];
 
 export const questions = shuffleArray(allQuestions);
+window.questions = questions;
