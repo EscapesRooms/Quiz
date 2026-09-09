@@ -9,7 +9,7 @@
     return array;
 }
 
-window.questions = shuffleArray([
+const allQuestions = [
     {
         category: "Persona",
         question: "¿Cuál es la comida favorita de esta persona?",
@@ -80,4 +80,6 @@ window.questions = shuffleArray([
         correct: 0,
         explanation: "Viajar por el mundo es una meta muy representativa de personas que buscan experiencias y libertad."
     }
-]);
+];
+
+export const questions = shuffleArray(allQuestions);

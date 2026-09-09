@@ -6,6 +6,12 @@ import {
     updatePlayerScore
 }
 from "./player-service.js";
+
+import {
+    questions
+}
+from "./questions-module.js";
+
 /* ==========================================
    PREGUNTA ACTUAL
    ========================================== */
@@ -48,6 +54,36 @@ parseInt(
 /* ==========================================
    VALIDAR PREGUNTA
    ========================================== */
+
+if(questions.length === 0){
+
+    document.body.innerHTML = `
+
+        <div class="welcome-container">
+
+            <h1 class="game-title">
+                ⚠️ Quiz sin preguntas
+            </h1>
+
+            <div class="rules-box">
+
+                <p>
+                    No se han cargado las preguntas.
+                </p>
+
+                <p>
+                    Revisa el archivo <strong>js/questions-module.js</strong>
+                    y asegúrate de que exista la lista de preguntas.
+                </p>
+
+            </div>
+
+        </div>
+    `;
+
+    throw new Error("No hay preguntas cargadas");
+
+}
 
 if(currentQuestion >= questions.length){
 
