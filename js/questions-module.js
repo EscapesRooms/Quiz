@@ -1,108 +1,108 @@
 ﻿const allQuestions = [
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Cuál es la comida favorita de Júlia?",
-        answers: ["Pizza", "Sushi", "Tacos", "Paella"],
-        correct: 1,
-        explanation: "Este conocimiento no te hará más rico, pero tampoco más pobre."
+        category: "El gran Quiz",
+        question: "¿Menjar preferit de Júlia?",
+        answers: ["Fricandó", "Arròs amb cigrons", "Escalivado", "Paella"],
+        correct: 0,
+        explanation: "Aquest coneixement no t'afectarà ni així ni així, però tampoc no et farà més ric."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Cuál es su DJ favorito/a?",
-        answers: ["Nico Moreno", "Paul Kalkbrenner", "Amelie Lens", "Nova"],
+        category: "El gran Quiz",
+        question: "¿Com es deia el peluix que el seu germà li va arrencar un ull?",
+        answers: ["Pepitu", "Lemur", "Pastanaga", "Dormilega"],
         correct: 2,
-        explanation: "Una pregunta fácil para quien la conoce y una emboscada para el resto."
+        explanation: "Una pregunta fàcil per a qui la coneix i una emboscada per la resta."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Cuál es el ultimo tatuaje que se ha hecho?",
-        answers: ["Homerpirriki", "Pussy juice", "PopCorn Planet", "Wine Not"],
+        category: "El gran Quiz",
+        question: "¿Nom de l'àvia paterna?",
+        answers: ["Antonia", "Júlia", "Enriqueta", "Rita"],
         correct: 3,
-        explanation: "Información que jamás pediste, pero que ahora te pertenece."
+        explanation: "Informació que només coneixen les persones més pròximes a Júlia."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Cuál es su nombre budista?",
+        category: "El gran Quiz",
+        question: "¿Quin és el seu nom budista?",
         answers: ["Maya", "Prajna", "Ghala", "Manjari"],
         correct: 2,
-        explanation: "Júlia probablemente no esperaba que este dato acabara siendo de dominio público."
+        explanation: "Júlia probablement no esperava que aquesta dada acabés sent de domini públic."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Cuál es su color favorito?",
+        category: "El gran Quiz",
+        question: "¿Quin és el seu color favorit?",
         answers: ["Amarillo", "Rojo", "Verde", "Azul"],
         correct: 0,
-        explanation: "Si has fallado esta pregunta, seguramente también preguntas quién es el novio en las bodas."
+        explanation: "Si has fallat aquesta pregunta, la Júlia acaba de perdre una mica de fe en tu."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Cuantos tatuajes tiene?",
+        category: "El gran Quiz",
+        question: "¿Quants tatuatges té?",
         answers: ["entre 5 y 10", "Entre 10 y 20", "Entre 20 y 30", "Entre 30 y 40"],
-        correct: 2,
-        explanation: "Si has fallado, quizás deberías empezar a tomar apuntes."
+        correct: 3,
+        explanation: "Si has fallat aquesta pregunta, hauries de comptar-li de tant en tant."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Último viaje que ha hecho con las madrastras de cenicienta (Lore y Xona)?",
-        answers: ["Lisboa", "Turín", "Oporto", "Pais Vasco"],
-        correct: 2,
-        explanation: "Cada día aprendemos algo nuevo. Hoy te ha tocado esto."
+        category: "El gran Quiz",
+        question: "¿Últim viatje que ha fet aquest estiu?",
+        answers: ["Itàlia", "Grècia i Albània", "Portugal", "Vietnam"],
+        correct: 1,
+        explanation: "Un viatge que, per lo que es veu, va deixar petjada a la memòria de Júlia."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Qué talla de pie tiene?",
+        category: "El gran Quiz",
+        question: "¿Quina és la seva talla de peu?",
         answers: ["35", "35,5", "36", "36,5"],
         correct: 1,
-        explanation: "Si has fallado esta pregunta, Júlia acaba de perder un poco de fe en ti."
+        explanation: "Si has fallat aquesta pregunta, li deus unes sabates."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Nombres de su padre y de su hermano?",
-        answers: ["Joan y Quim", "Ricard y Marc", "Pep y Josep", "Lluis y Xavi"],
-        correct: 1,
-        explanation: "No todo el mundo ha tenido el placer de conocer el árbol genealógico completo."
+        category: "El gran Quiz",
+        question: "¿Nom de la seva amiga de la infancia?",
+        answers: ["Sara", "Berta", "Mari", "Paula"],
+        correct: 2,
+        explanation: "No tothom ha tingut el plaer de conèixer el àrbol genealògic complet."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Último color de pelo que ha tenido?",
-        answers: ["Rosa", "Rojo", "Azúl", "Blanco"],
+        category: "El gran Quiz",
+        question: "¿Nom del poble de l'àvia materna?",
+        answers: ["Arroyo del Ojanco", "Beas de Segura", "Úbeda", "Arbuniel"],
+        correct: 0,
+        explanation: "Necessitaràs un mapa per trobar-lo."
+    },
+    {
+        category: "El gran Quiz",
+        question: "¿Quina beguda li agrada més?",
+        answers: ["Vermut", "Vi Blanc", "Vi Negre", "Cervessa"],
+        correct: 2,
+        explanation: "Si has fallat aquesta pregunta, hauries de comprar-li una ampolla de vi."
+    },
+    {
+        category: "El gran Quiz",
+        question: "¿Quin sobrenom utilizava el tio Antonio per referir-se a la Júlia?",
+        answers: ["Porqueta", "Tonteta", "Nineta", "Ruqueta"],
         correct: 3,
-        explanation: "La utilidad práctica de este dato sigue siendo objeto de estudio."
+        explanation: "Aquest mot la feia plorar."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Cuál es su bebida favorita en una noche de fiesta?",
-        answers: ["Gin tonic", "Vodka con naranja", "Whisky Cola", "Cerveza"],
-        correct: 2,
-        explanation: "Hay preguntas que solo las personas cercanas resuelven con un 100% de seguridad."
-    },
-    {
-        category: "El Quiz de la Guarra",
-        question: "¿Como se llama el chupito que crea para las fiestas de la Prospe con Berta y Natalia?",
-        answers: ["ChupiFresk", "FreskBall", "FireFresk", "FreskShot"],
+        category: "El gran Quiz",
+        question: "¿Quin joc de mòbil li ha enganxat a jugar el seu pare recentment?",
+        answers: ["Sudoku", "Vita Mahjong", "Tetris", "Snake"],
         correct: 1,
-        explanation: "Un dato que solo los más cercanos a Júlia conocen, y que ahora también tú sabes."
+        explanation: "Tots dos son força dolents."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Que país visito hace unos años rodeada de amigos y tempestas?",
-        answers: ["Bali", "Tailandia", "Filipinas", "Indonesia"],
-        correct: 2,
-        explanation: "Un viaje que, por lo que se ve, dejó huella en la memoria de Júlia."
-    },
-    {
-        category: "El Quiz de la Guarra",
-        question: "¿Nombre de la primera escuela en la que estudió?",
+        category: "El gran Quiz",
+        question: "¿Nom de la seva primera escola?",
         answers: ["CEIP Guinardó", "Escola Estel Guinardó", "La Salle Horta", "Escola del Mar"],
         correct: 3,
-        explanation: "La primera etapa de la educación es fundamental para el desarrollo personal."
+        explanation: "La escola on va passar la seva infància."
     },
     {
-        category: "El Quiz de la Guarra",
-        question: "¿Como suele llamar a irse de copas con amigos?",
-        answers: ["Chelas", "Pirrikis", "Pirrichis", "Pichichis"],
-        correct: 1,
-        explanation: "Un apodo que solo los más cercanos a Júlia conocen, y que ahora también tú sabes."
+        category: "El gran Quiz",
+        question: "¿On estiuejava la Júlia quan era petita?",
+        answers: ["Premià de Mar", "Blanes", "Segur de Calafell", "St Pol de Mar"],
+        correct: 2,
+        explanation: "L'estiu es una època especial per a Júlia."
     }
 ];
 
