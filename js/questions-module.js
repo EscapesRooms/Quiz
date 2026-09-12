@@ -2,7 +2,7 @@
     {
         category: "El gran Quiz",
         question: "¿Menjar preferit de Júlia?",
-        answers: ["Fricandó", "Arròs amb cigrons", "Escalivado", "Paella"],
+        answers: ["Fricandó", "Arròs amb cigrons", "Escalivada", "Paella"],
         correct: 0,
         explanation: "Aquest coneixement no t'afectarà ni així ni així, però tampoc no et farà més ric."
     },
