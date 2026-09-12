@@ -109,15 +109,15 @@ function goToNextQuestion() {
             <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
             <div class="rules-box">
                 <h2>👤 ${playerName}</h2>
-                <p>🏳️ Equipo: ${team}</p>
+                <p>🏳️ Equip: ${team}</p>
                 <br>
-                <p>✅ Aciertos: ${hits}</p>
-                <p>❌ Fallos: ${fails}</p>
-                <p>🎯 Precisión: ${accuracy}%</p>
-                <p>🏆 Mejor puntuación: ${bestScore}</p>
+                <p>✅ Encerts: ${hits}</p>
+                <p>❌ Errades: ${fails}</p>
+                <p>🎯 Precisió: ${accuracy}%</p>
+                <p>🏆 Millor puntuació: ${bestScore}</p>
                 ${finalMessage}
                 <br>
-                <h2>🏆 Puntuación final: ${score} puntos</h2>
+                <h2>🏆 Puntuació final: ${score} punts</h2>
             </div>
         </div>
     `;
@@ -156,15 +156,15 @@ nextQuestionBtn.addEventListener("click", async () => {
                 <h1 class="game-title">🏆 JUEGO FINALIZADO</h1>
                 <div class="rules-box">
                     <h2>👤 ${playerName}</h2>
-                    <p>🏳️ Equipo: ${team}</p>
+                    <p>🏳️ Equip: ${team}</p>
                     <br>
-                    <p>✅ Aciertos: ${score}</p>
-                    <p>❌ Fallos: ${questions.length - score}</p>
-                    <p>🎯 Precisión: ${Math.round((score / questions.length) * 100)}%</p>
-                    <p>🏆 Mejor puntuación: ${bestScore}</p>
+                    <p>✅ Encerts: ${score}</p>
+                    <p>❌ Errades: ${questions.length - score}</p>
+                    <p>🎯 Precisió: ${Math.round((score / questions.length) * 100)}%</p>
+                    <p>🏆 Millor puntuació: ${bestScore}</p>
                     ${finalMessage}
                     <br>
-                    <h2>🏆 Puntuación final: ${score} puntos</h2>
+                    <h2>🏆 Puntuació final: ${score} punts</h2>
                 </div>
             </div>
         `;
@@ -213,11 +213,11 @@ buttons.forEach((button, index) => {
         if (selectedAnswer === q.correct) {
             document.getElementById("resultBox").innerHTML = `
                 <div class="result-correct">
-                    <div class="result-title">✅ ¡CORRECTO!</div>
-                    <p>+1 punto</p>
+                    <div class="result-title">✅ ¡CORRECTE!</div>
+                    <p>+1 punt</p>
                 </div>
                 <div class="result-info">
-                    <strong>ℹ️ Información</strong>
+                    <strong>ℹ️ Informació</strong>
                     <br><br>
                     ${q.explanation}
                 </div>
@@ -225,12 +225,12 @@ buttons.forEach((button, index) => {
         } else {
             document.getElementById("resultBox").innerHTML = `
                 <div class="result-wrong">
-                    <div class="result-title">❌ INCORRECTO</div>
+                    <div class="result-title">❌ INCORRECTE</div>
                     <p>Respuesta correcta:</p>
                     <strong>✅ ${q.answers[q.correct]}</strong>
                 </div>
                 <div class="result-info">
-                    <strong>ℹ️ Información</strong>
+                    <strong>ℹ️ Informació</strong>
                     <br><br>
                     ${q.explanation}
                 </div>
