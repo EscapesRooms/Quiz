@@ -9,7 +9,7 @@ import {
 // Preguntas actuales
 import {
     questions
-} from "./questions-module.js";
+} from "./questions-module - Ricard.js";
 
 // import {
 //     questions
