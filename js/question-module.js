@@ -6,9 +6,18 @@ import {
     updatePlayerScore
 } from "./player-service.js";
 
+// Preguntas actuales
 import {
     questions
 } from "./questions-module.js";
+
+// import {
+//     questions
+// } from "./questions-module - Montse.js";
+
+// import {
+//     questions
+// } from "./questions-module - Guarrita.js";
 
 /* ==========================================
    VARIABLES DE ESTADO

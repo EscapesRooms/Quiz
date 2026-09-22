@@ -30,7 +30,7 @@
     {
         category: "El gran Quiz",
         question: "¿Quin és el seu color favorit?",
-        answers: ["Amarillo", "Rojo", "Verde", "Azul"],
+        answers: ["Groc", "Vermell", "Verd", "Blau"],
         correct: 0,
         explanation: "Si has fallat aquesta pregunta, la Júlia acaba de perdre una mica de fe en tu."
     },
