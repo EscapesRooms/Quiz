@@ -50,7 +50,9 @@ document.getElementById("language").addEventListener("change", (event) => {
     localStorage.removeItem("currentQuestion");
     localStorage.removeItem("score");
     localStorage.setItem("quizLanguage", event.target.value);
-    location.reload();
+    const url = new URL(location.href);
+    url.searchParams.set("lang", event.target.value);
+    location.assign(url);
 });
 
 /* ==========================================
