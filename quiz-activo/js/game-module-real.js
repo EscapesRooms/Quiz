@@ -7,6 +7,8 @@ import {
 }
 from "./player-service.js";
 
+import { getPlayerId } from "./firebase.js";
+
 import { language, copy } from "./quiz-config.js";
 
 document.documentElement.lang = language;
@@ -19,6 +21,22 @@ document.getElementById("playerName").placeholder = copy.playerPlaceholder;
 document.getElementById("continueBtn").textContent = copy.start;
 document.getElementById("continueExistingPlayer").textContent = copy.continueAs;
 document.getElementById("resetPlayerBtn").textContent = copy.changePlayer;
+
+function getSaveErrorMessage(error){
+    if(error.code === "auth/configuration-not-found"){
+        return copy.authNotConfigured;
+    }
+
+    if(error.code === "auth/operation-not-allowed"){
+        return copy.anonymousAuthDisabled;
+    }
+
+    if(error.code === "permission-denied" || error.code === "firestore/permission-denied"){
+        return copy.firestoreRulesMissing;
+    }
+
+    return `${copy.savePlayerError} (${error.code || "unknown"})`;
+}
 
 document.getElementById("language").addEventListener("change", (event) => {
     const hasProgress = Number(localStorage.getItem("currentQuestion")) > 0
@@ -38,29 +56,6 @@ document.getElementById("language").addEventListener("change", (event) => {
 /* ==========================================
    VARIABLES
    ========================================== */
-
-/* ==========================================
-   ID ÚNICO DEL JUGADOR
-   ========================================== */
-
-// Recuperar ID existente
-let playerId =
-localStorage.getItem(
-    "playerId"
-);
-
-// Si no existe crear uno
-if(!playerId){
-
-    playerId =
-    crypto.randomUUID();
-
-    localStorage.setItem(
-        "playerId",
-        playerId
-    );
-
-}
 
 /* ==========================================
    REFERENCIAS HTML
@@ -191,12 +186,15 @@ continueBtn.addEventListener(
                GUARDAR JUGADOR EN FIRESTORE
                ========================================== */
 
+            const playerId = await getPlayerId();
+            localStorage.setItem("playerId", playerId);
+
             await savePlayer(
 
                 playerId,
                 playerNameValue,
                 "General",
-                0
+                Number(localStorage.getItem("bestScore")) || 0
 
             );
 
@@ -216,7 +214,7 @@ continueBtn.addEventListener(
                 error
             );
 
-            alert(copy.savePlayerError);
+            alert(getSaveErrorMessage(error));
 
         }
 
@@ -235,10 +233,25 @@ document.getElementById(
 if(continueExistingPlayer){
 
     continueExistingPlayer
-    .addEventListener("click",()=>{
+    .addEventListener("click", async ()=>{
 
-        window.location.href =
-        "rules-module.html";
+        try{
+            const playerId = await getPlayerId();
+            localStorage.setItem("playerId", playerId);
+
+            await savePlayer(
+                playerId,
+                savedPlayer,
+                localStorage.getItem("team") || "General",
+                Number(localStorage.getItem("bestScore")) || 0
+            );
+
+            window.location.href = "rules-module.html";
+        }
+        catch(error){
+            console.error("Error retomando jugador:", error);
+            alert(getSaveErrorMessage(error));
+        }
 
     });
 

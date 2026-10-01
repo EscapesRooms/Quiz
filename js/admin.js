@@ -1,4 +1,4 @@
-﻿import { getPlayersRanking } from "./player-service.js";
+﻿import { getPlayersRanking } from "../quiz-activo/js/player-service.js";
 
 const rankingList = document.getElementById("rankingList");
 const emptyState = document.getElementById("emptyState");

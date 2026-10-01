@@ -6,6 +6,12 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
 import {
+   getAuth,
+   signInAnonymously
+}
+from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+import {
     getFirestore,
     doc,
     setDoc,
@@ -59,6 +65,22 @@ initializeApp(firebaseConfig);
 const db =
 getFirestore(app);
 
+const auth =
+getAuth(app);
+
+async function getPlayerId(){
+
+   if(auth.currentUser){
+      return auth.currentUser.uid;
+   }
+
+   const credential =
+   await signInAnonymously(auth);
+
+   return credential.user.uid;
+
+}
+
 
 /* ==========================================
    EXPORTAR OBJETOS
@@ -66,6 +88,7 @@ getFirestore(app);
 
 export {
     db,
+   getPlayerId,
     doc,
     setDoc,
     getDoc,

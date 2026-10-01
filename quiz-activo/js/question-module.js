@@ -5,6 +5,7 @@
 import {
     updatePlayerScore
 } from "./player-service.js";
+import { getPlayerId } from "./firebase.js";
 
 import { language, copy, questions } from "./quiz-config.js";
 
@@ -130,8 +131,6 @@ function goToNextQuestion() {
 nextQuestionBtn.addEventListener("click", async () => {
     const playerName = localStorage.getItem("playerName") || "Jugador";
     const team = localStorage.getItem("team") || "General";
-    const playerId = localStorage.getItem("playerId") || "unknown";
-
     if (currentQuestion >= questions.length - 1) {
         let bestScore = parseInt(localStorage.getItem("bestScore"), 10) || 0;
         let newRecord = false;
@@ -143,6 +142,8 @@ nextQuestionBtn.addEventListener("click", async () => {
         }
 
         try {
+            const playerId = await getPlayerId();
+            localStorage.setItem("playerId", playerId);
             await updatePlayerScore(playerId, playerName, team, score);
         } catch (error) {
             console.error("Error actualizando score:", error);

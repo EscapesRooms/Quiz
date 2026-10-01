@@ -4,6 +4,7 @@
 
 import {
     db,
+    getPlayerId,
     doc,
     setDoc,
     collection,
@@ -26,6 +27,10 @@ export async function savePlayer(
     score
 
 ){
+
+    if(await getPlayerId() !== playerId){
+        throw new Error("El jugador no coincide con la sesión autenticada");
+    }
 
     await setDoc(
 
@@ -59,6 +64,10 @@ export async function updatePlayerScore(
 
 ){
 
+    if(await getPlayerId() !== playerId){
+        throw new Error("El jugador no coincide con la sesión autenticada");
+    }
+
     await setDoc(
 
         doc(
@@ -84,6 +93,8 @@ export async function updatePlayerScore(
    ========================================== */
 
 export async function getPlayersRanking(){
+
+    await getPlayerId();
 
     const playersRef =
     collection(
