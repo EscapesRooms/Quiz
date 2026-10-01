@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Battle</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <main class="welcome-container">
+        <label for="language" id="languageLabel">Idioma</label>
+        <select id="language" aria-label="Idioma">
+            <option value="es">Castellano</option>
+            <option value="ca">Català</option>
+        </select>
+
+        <h1 class="game-title" id="gameTitle">Quiz Battle</h1>
+        <div id="savedPlayerInfo"></div>
+
+        <div id="existingPlayerActions" style="display:none;">
+            <button id="continueExistingPlayer" class="continue-btn"></button>
+            <button id="resetPlayerBtn" class="continue-btn"></button>
+        </div>
+
+        <p class="description" id="description"></p>
+        <input type="text" id="playerName" class="player-input">
+        <button id="continueBtn" class="continue-btn" disabled></button>
+    </main>
+
+    <script type="module" src="js/game-module-real.js"></script>
+</body>
+
+</html>

@@ -7,6 +7,34 @@ import {
 }
 from "./player-service.js";
 
+import { language, copy } from "./quiz-config.js";
+
+document.documentElement.lang = language;
+document.title = copy.title;
+document.getElementById("gameTitle").textContent = copy.title;
+document.getElementById("languageLabel").textContent = copy.languageLabel;
+document.getElementById("language").value = language;
+document.getElementById("description").textContent = copy.description;
+document.getElementById("playerName").placeholder = copy.playerPlaceholder;
+document.getElementById("continueBtn").textContent = copy.start;
+document.getElementById("continueExistingPlayer").textContent = copy.continueAs;
+document.getElementById("resetPlayerBtn").textContent = copy.changePlayer;
+
+document.getElementById("language").addEventListener("change", (event) => {
+    const hasProgress = Number(localStorage.getItem("currentQuestion")) > 0
+        || Number(localStorage.getItem("score")) > 0;
+
+    if (hasProgress && !window.confirm(copy.languageChangeWarning)) {
+        event.target.value = language;
+        return;
+    }
+
+    localStorage.removeItem("currentQuestion");
+    localStorage.removeItem("score");
+    localStorage.setItem("quizLanguage", event.target.value);
+    location.reload();
+});
+
 /* ==========================================
    VARIABLES
    ========================================== */
@@ -74,7 +102,7 @@ if(savedPlayer){
             </h2>
 
             <p>
-                Jugador ya configurado
+                ${copy.playerConfigured}
             </p>
 
         </div>
@@ -188,9 +216,7 @@ continueBtn.addEventListener(
                 error
             );
 
-            alert(
-                "Error guardando jugador"
-            );
+            alert(copy.savePlayerError);
 
         }
 

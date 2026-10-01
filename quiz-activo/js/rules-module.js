@@ -1,3 +1,13 @@
+import { language, copy } from "./quiz-config.js";
+
+document.documentElement.lang = language;
+document.title = copy.rulesTitle;
+document.getElementById("rulesTitle").textContent = copy.rulesTitle;
+document.getElementById("ruleNoTime").textContent = `✅ ${copy.ruleNoTime}`;
+document.getElementById("rulePoint").textContent = `✅ ${copy.rulePoint}`;
+document.getElementById("rulePrize").textContent = `✅ ${copy.rulePrize}`;
+document.getElementById("newGameBtn").textContent = copy.startGame;
+
 /* ==========================================
    DATOS DEL JUGADOR
    ========================================== */
