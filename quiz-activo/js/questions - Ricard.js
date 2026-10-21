@@ -1,4 +1,4 @@
-﻿export const quizId = "julia";
+export const quizId = "ricard";
 
 const allQuestions = [
     {
