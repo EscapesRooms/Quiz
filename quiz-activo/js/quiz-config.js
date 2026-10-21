@@ -1,5 +1,5 @@
 // Cambia este archivo para elegir el banco activo en castellano.
-import { questions as spanishQuestions, quizId as spanishQuizId } from "./questions - Montse.js";
+import { questions as spanishQuestions, quizId as spanishQuizId } from "./questions - Julia.js";
 import { questions as catalanQuestions, quizId as catalanQuizId } from "./questions - Ricard.js";
 
 const supportedLanguages = ["es", "ca"];
