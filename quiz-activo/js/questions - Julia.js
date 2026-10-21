@@ -1,4 +1,6 @@
-﻿const allQuestions = [
+﻿export const quizId = "julia";
+
+const allQuestions = [
     {
         category: "El Quiz de la Guarra",
         question: "¿Cuál es la comida favorita de Júlia?",

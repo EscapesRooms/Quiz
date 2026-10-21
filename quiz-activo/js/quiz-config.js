@@ -1,6 +1,6 @@
 // Cambia este archivo para elegir el banco activo en castellano.
-import { questions as spanishQuestions } from "./questions - Montse.js";
-import { questions as catalanQuestions } from "./questions - Ricard.js";
+import { questions as spanishQuestions, quizId as spanishQuizId } from "./questions - Montse.js";
+import { questions as catalanQuestions, quizId as catalanQuizId } from "./questions - Ricard.js";
 
 const supportedLanguages = ["es", "ca"];
 const requestedLanguage = new URLSearchParams(location.search).get("lang");
@@ -14,6 +14,7 @@ export const language = supportedLanguages.includes(localStorage.getItem("quizLa
     : "es";
 
 export const questions = language === "ca" ? catalanQuestions : spanishQuestions;
+export const quizId = language === "ca" ? catalanQuizId : spanishQuizId;
 
 export const copy = language === "ca" ? {
     title: "Quiz Battle",
@@ -21,6 +22,7 @@ export const copy = language === "ca" ? {
     changePlayer: "Canviar de jugador",
     playerConfigured: "Jugador configurat",
     savePlayerError: "No s'ha pogut desar el jugador.",
+    scoreSaveError: "La partida ha acabat, però no s'ha pogut desar la puntuació. Torna-ho a provar més tard.",
     authNotConfigured: "Firebase Authentication no està inicialitzat. A Firebase Console, obre Authentication i prem Començar.",
     anonymousAuthDisabled: "Cal activar l'inici de sessió anònim a Firebase Console > Authentication > Sign-in method.",
     firestoreRulesMissing: "Firestore ha rebutjat el registre. Publica les regles de firestore.rules al projecte Firebase.",
@@ -59,6 +61,7 @@ export const copy = language === "ca" ? {
     changePlayer: "Cambiar de jugador",
     playerConfigured: "Jugador configurado",
     savePlayerError: "No se ha podido guardar el jugador.",
+    scoreSaveError: "La partida ha terminado, pero no se ha podido guardar la puntuación. Inténtalo de nuevo más tarde.",
     authNotConfigured: "Firebase Authentication no está inicializado. En Firebase Console, abre Authentication y pulsa Empezar.",
     anonymousAuthDisabled: "Activa el inicio de sesión anónimo en Firebase Console > Authentication > Sign-in method.",
     firestoreRulesMissing: "Firestore ha rechazado el registro. Publica las reglas de firestore.rules en el proyecto Firebase.",

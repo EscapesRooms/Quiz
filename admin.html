@@ -37,6 +37,22 @@
             flex-wrap: wrap;
         }
 
+        .quiz-select {
+            min-width: 220px;
+            padding: 10px 12px;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            border-radius: 10px;
+            background: #1e293b;
+            color: #f8fafc;
+            font: inherit;
+        }
+
+        .legacy-note {
+            margin: 0 0 18px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
         .refresh-btn {
             background: #22c55e;
             color: white;
@@ -80,9 +96,19 @@
         <h1>🏆 Ranking del Quiz</h1>
 
         <div class="toolbar">
-            <p>Últimas puntuaciones registradas en la base de datos.</p>
+            <label for="quizSelect">Ranking:
+                <select id="quizSelect" class="quiz-select">
+                    <option value="montse">Quiz de Montse</option>
+                    <option value="julia">Quiz de Júlia</option>
+                    <option value="legacy">Histórico sin clasificar</option>
+                </select>
+            </label>
             <button id="refreshBtn" class="refresh-btn">🔄 Recargar</button>
         </div>
+
+        <p class="legacy-note">
+            Las puntuaciones antiguas se conservan en el histórico; las nuevas se separan por quiz.
+        </p>
 
         <div id="emptyState" class="empty-state" style="display:none;">
             Todavía no hay puntuaciones guardadas.

@@ -7,7 +7,7 @@ import {
 } from "./player-service.js";
 import { getPlayerId } from "./firebase.js";
 
-import { language, copy, questions } from "./quiz-config.js";
+import { language, copy, questions, quizId } from "./quiz-config.js";
 
 document.documentElement.lang = language;
 document.title = copy.question;
@@ -144,9 +144,10 @@ nextQuestionBtn.addEventListener("click", async () => {
         try {
             const playerId = await getPlayerId();
             localStorage.setItem("playerId", playerId);
-            await updatePlayerScore(playerId, playerName, team, score);
+            await updatePlayerScore(quizId, playerId, playerName, team, score);
         } catch (error) {
             console.error("Error actualizando score:", error);
+            window.alert(copy.scoreSaveError);
         }
 
         const finalMessage = score >= 10

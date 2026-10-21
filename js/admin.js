@@ -1,8 +1,12 @@
-﻿import { getPlayersRanking } from "../quiz-activo/js/player-service.js";
+import {
+    getPlayersRanking,
+    getUnassignedLegacyRanking
+} from "../quiz-activo/js/player-service.js";
 
 const rankingList = document.getElementById("rankingList");
 const emptyState = document.getElementById("emptyState");
 const refreshBtn = document.getElementById("refreshBtn");
+const quizSelect = document.getElementById("quizSelect");
 
 function renderRanking(players) {
     rankingList.innerHTML = "";
@@ -35,7 +39,9 @@ function renderRanking(players) {
 
 async function loadRanking() {
     try {
-        const players = await getPlayersRanking();
+        const players = quizSelect.value === "legacy"
+            ? await getUnassignedLegacyRanking()
+            : await getPlayersRanking(quizSelect.value);
         renderRanking(players);
     }
     catch (error) {
@@ -49,4 +55,5 @@ async function loadRanking() {
 }
 
 refreshBtn.addEventListener("click", loadRanking);
+quizSelect.addEventListener("change", loadRanking);
 loadRanking();

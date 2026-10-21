@@ -23,8 +23,7 @@ export async function savePlayer(
 
     playerId,
     playerName,
-    team,
-    score
+    team
 
 ){
 
@@ -33,20 +32,13 @@ export async function savePlayer(
     }
 
     await setDoc(
-
-        doc(
-            db,
-            "players",
-            playerId
-        ),
-
+        doc(db, "players", playerId),
         {
             playerId,
             playerName,
-            team,
-            score
-        }
-
+            team
+        },
+        { merge: true }
     );
 
 }
@@ -57,6 +49,7 @@ export async function savePlayer(
 
 export async function updatePlayerScore(
 
+    quizId,
     playerId,
     playerName,
     team,
@@ -69,13 +62,7 @@ export async function updatePlayerScore(
     }
 
     await setDoc(
-
-        doc(
-            db,
-            "players",
-            playerId
-        ),
-
+        doc(db, "quiz", quizId, "players", playerId),
         {
             playerId,
             playerName,
@@ -92,24 +79,29 @@ export async function updatePlayerScore(
    OBTENER RANKING
    ========================================== */
 
-export async function getPlayersRanking(){
+export async function getPlayersRanking(quizId){
 
     await getPlayerId();
 
-    const playersRef =
-    collection(
-        db,
-        "players"
-    );
+    const playersRef = collection(db, "quiz", quizId, "players");
+    const rankingQuery = query(playersRef, orderBy("score", "desc"));
+    const snapshot = await getDocs(rankingQuery);
 
-    const rankingQuery =
-    query(
-        playersRef,
-        orderBy("score", "desc")
+    return snapshot.docs.map(
+        item => ({
+            id: item.id,
+            ...item.data()
+        })
     );
+}
 
-    const snapshot =
-    await getDocs(rankingQuery);
+export async function getUnassignedLegacyRanking(){
+
+    await getPlayerId();
+
+    const playersRef = collection(db, "players");
+    const rankingQuery = query(playersRef, orderBy("score", "desc"));
+    const snapshot = await getDocs(rankingQuery);
 
     return snapshot.docs.map(
         item => ({

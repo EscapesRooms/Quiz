@@ -195,8 +195,7 @@ continueBtn.addEventListener(
 
                 playerId,
                 playerNameValue,
-                "General",
-                Number(localStorage.getItem("bestScore")) || 0
+                "General"
 
             );
 
@@ -244,8 +243,7 @@ if(continueExistingPlayer){
             await savePlayer(
                 playerId,
                 savedPlayer,
-                localStorage.getItem("team") || "General",
-                Number(localStorage.getItem("bestScore")) || 0
+                localStorage.getItem("team") || "General"
             );
 
             window.location.href = "rules.html";
