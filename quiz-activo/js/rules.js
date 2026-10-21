@@ -68,8 +68,7 @@ document.getElementById(
 
 if(currentQuestion > 0 && continueBtn){
 
-    continueBtn.style.display =
-    "inline-block";
+    continueBtn.hidden = false;
 
     continueBtn.innerHTML =
 
@@ -86,10 +85,7 @@ if(currentQuestion > 0 && continueBtn){
 
         saveInfo.innerHTML =
 
-        `<p style="
-        margin-bottom:20px;
-        color:#4ade80;
-        ">
+        `<p class="save-info">
         💾 Partida guardada detectada
         </p>`;
 
@@ -121,7 +117,7 @@ if(newGameBtn){
         );
 
         window.location.href =
-        "question-module.html";
+        "question.html";
 
     });
 
@@ -138,7 +134,7 @@ if(continueBtn){
     .addEventListener("click",()=>{
 
         window.location.href =
-        "question-module.html";
+        "question.html";
 
     });
 

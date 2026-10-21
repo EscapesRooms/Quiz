@@ -1,5 +1,5 @@
-import { questions as spanishQuestions } from "./questions-module - Montse.js";
-import { questions as catalanQuestions } from "./questions-module - Ricard.js";
+import { questions as spanishQuestions } from "./questions - Julia.js";
+import { questions as catalanQuestions } from "./questions - Ricard.js";
 
 const supportedLanguages = ["es", "ca"];
 const requestedLanguage = new URLSearchParams(location.search).get("lang");

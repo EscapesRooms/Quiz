@@ -103,8 +103,8 @@ function goToNextQuestion() {
     }
 
     const finalMessage = score >= 10
-        ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">${copy.prizeWon}</p>`
-        : `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">${copy.prizeLost}</p>`;
+        ? `<p class="prize-message">${copy.prizeWon}</p>`
+        : `<p class="prize-message">${copy.prizeLost}</p>`;
 
     document.body.innerHTML = `
         <div class="welcome-container">
@@ -150,8 +150,8 @@ nextQuestionBtn.addEventListener("click", async () => {
         }
 
         const finalMessage = score >= 10
-            ? `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">${copy.prizeWon}</p>`
-            : `<p style="color:#facc15;font-weight:bold;font-size:1.2rem;margin-top:20px;">${copy.prizeLost}</p>`;
+            ? `<p class="prize-message">${copy.prizeWon}</p>`
+            : `<p class="prize-message">${copy.prizeLost}</p>`;
 
         document.body.innerHTML = `
             <div class="welcome-container">
@@ -191,7 +191,7 @@ buttons.forEach((button, index) => {
         buttons.forEach((btn) => {
             btn.disabled = true;
             if (btn !== button) {
-                btn.style.opacity = "0.4";
+                btn.classList.add("answer--faded");
             }
         });
 
@@ -209,8 +209,8 @@ buttons.forEach((button, index) => {
             buttons[selectedAnswer].classList.add("wrong");
         }
 
-        document.getElementById("resultBox").style.display = "block";
-        nextQuestionBtn.style.display = "block";
+        document.getElementById("resultBox").hidden = false;
+        nextQuestionBtn.hidden = false;
 
         if (selectedAnswer === q.correct) {
             document.getElementById("resultBox").innerHTML = `

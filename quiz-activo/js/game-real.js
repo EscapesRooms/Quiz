@@ -109,13 +109,13 @@ if(savedPlayer){
     // Mostrar acciones disponibles
     document
     .getElementById("existingPlayerActions")
-    .style.display = "block";
+    .hidden = false;
 
     // Ocultar selector de nombre
-    playerName.style.display = "none";
+    playerName.hidden = true;
 
     // Ocultar botón continuar normal
-    continueBtn.style.display = "none";
+    continueBtn.hidden = true;
 }
 
 
@@ -206,7 +206,7 @@ continueBtn.addEventListener(
 
             // Ir a normas
             window.location.href =
-            "rules-module.html";
+            "rules.html";
 
         }
         catch(error){
@@ -248,7 +248,7 @@ if(continueExistingPlayer){
                 Number(localStorage.getItem("bestScore")) || 0
             );
 
-            window.location.href = "rules-module.html";
+            window.location.href = "rules.html";
         }
         catch(error){
             console.error("Error retomando jugador:", error);
