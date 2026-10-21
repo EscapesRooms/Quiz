@@ -3,7 +3,9 @@
    ========================================== */
 
 import {
-    updatePlayerScore
+    updatePlayerScore,
+    getPlayersRanking,
+    subscribePlayersRanking
 } from "./player-service.js";
 import { getPlayerId } from "./firebase.js";
 
@@ -75,6 +77,66 @@ let answered = false;
 let selectedAnswer = null;
 const buttons = document.querySelectorAll(".answer");
 const nextQuestionBtn = document.getElementById("nextQuestionBtn");
+
+function escapeHtml(value){
+    return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+function renderFinalRanking(players){
+    const rankingBody = document.getElementById("finalRankingBody");
+    const rankingStatus = document.getElementById("finalRankingStatus");
+    rankingBody.replaceChildren();
+
+    if (players.length === 0) {
+        rankingStatus.textContent = copy.rankingEmpty;
+        return;
+    }
+
+    players.forEach((player, index) => {
+        const row = document.createElement("tr");
+        const updatedAt = player.updatedAt && Number.isFinite(Date.parse(player.updatedAt))
+            ? new Date(player.updatedAt).toLocaleString(language === "ca" ? "ca-ES" : "es-ES")
+            : "—";
+
+        [
+            String(index + 1),
+            player.playerName || "Jugador",
+            player.team || "General",
+            String(player.score ?? 0),
+            updatedAt
+        ].forEach(value => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        rankingBody.appendChild(row);
+    });
+
+    rankingStatus.textContent = copy.rankingLive;
+}
+
+async function refreshFinalRanking(){
+    const refreshButton = document.getElementById("refreshRankingBtn");
+    const rankingStatus = document.getElementById("finalRankingStatus");
+    refreshButton.disabled = true;
+    rankingStatus.textContent = copy.rankingLoading;
+
+    try {
+        renderFinalRanking(await getPlayersRanking(quizId));
+    } catch (error) {
+        console.error("Error cargando el ranking del quiz:", error);
+        rankingStatus.textContent = copy.rankingLoadError;
+    } finally {
+        refreshButton.disabled = false;
+    }
+}
 
 function goToNextQuestion() {
     currentQuestion += 1;
@@ -155,11 +217,11 @@ nextQuestionBtn.addEventListener("click", async () => {
             : `<p class="prize-message">${copy.prizeLost}</p>`;
 
         document.body.innerHTML = `
-            <div class="welcome-container">
+            <main class="welcome-container final-result">
                 <h1 class="game-title">🏆 ${copy.finished}</h1>
                 <div class="rules-box">
-                    <h2>👤 ${playerName}</h2>
-                    <p>🏳️ ${copy.team}: ${team}</p>
+                    <h2>👤 ${escapeHtml(playerName)}</h2>
+                    <p>🏳️ ${copy.team}: ${escapeHtml(team)}</p>
                     <br>
                     <p>✅ ${copy.hits}: ${score}</p>
                     <p>❌ ${copy.misses}: ${questions.length - score}</p>
@@ -169,8 +231,44 @@ nextQuestionBtn.addEventListener("click", async () => {
                     <br>
                     <h2>🏆 ${copy.finalScore}: ${score}</h2>
                 </div>
-            </div>
+                <section class="final-ranking" aria-labelledby="finalRankingTitle">
+                    <h2 id="finalRankingTitle">${copy.rankingTitle}</h2>
+                    <p id="finalRankingStatus" aria-live="polite">${copy.rankingLoading}</p>
+                    <button id="refreshRankingBtn" class="continue-btn" type="button">${copy.refreshRanking}</button>
+                    <div class="final-ranking-table-wrap">
+                        <table class="final-ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>${copy.rankingPosition}</th>
+                                    <th>${copy.rankingPlayer}</th>
+                                    <th>${copy.team}</th>
+                                    <th>${copy.rankingScore}</th>
+                                    <th>${copy.rankingUpdatedAt}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="finalRankingBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
         `;
+
+        document.body.classList.add("has-final-result");
+        document.getElementById("refreshRankingBtn").addEventListener("click", refreshFinalRanking);
+        refreshFinalRanking();
+        try {
+            await subscribePlayersRanking(
+                quizId,
+                renderFinalRanking,
+                error => {
+                    console.error("Error en la actualización del ranking:", error);
+                    document.getElementById("finalRankingStatus").textContent = copy.rankingLoadError;
+                }
+            );
+        } catch (error) {
+            console.error("No se pudo iniciar la actualización del ranking:", error);
+            document.getElementById("finalRankingStatus").textContent = copy.rankingLoadError;
+        }
 
         localStorage.setItem("currentQuestion", "0");
         localStorage.setItem("score", "0");

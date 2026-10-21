@@ -19,7 +19,8 @@ import {
     collection,
     getDocs,
     query,
-    orderBy
+    orderBy,
+    onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
@@ -95,5 +96,6 @@ export {
     collection,
     getDocs,
     query,
-    orderBy
+    orderBy,
+    onSnapshot
 };

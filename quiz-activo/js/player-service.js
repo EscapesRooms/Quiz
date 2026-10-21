@@ -10,10 +10,31 @@ import {
     collection,
     getDocs,
     query,
-    orderBy
+    orderBy,
+    onSnapshot
 }
 from "./firebase.js";
 
+function rankingFromSnapshot(snapshot){
+    return snapshot.docs.map(item => ({
+        id: item.id,
+        ...item.data()
+    }));
+}
+
+function mergeJuliaHistory(currentPlayers, historicalPlayers){
+    const playersById = new Map(
+        historicalPlayers
+            .filter(player => player.updatedAt && Number.isFinite(Date.parse(player.updatedAt)))
+            .map(player => [player.id, player])
+    );
+
+    for (const player of currentPlayers) {
+        playersById.set(player.id, player);
+    }
+
+    return [...playersById.values()].sort((a, b) => b.score - a.score);
+}
 
 /* ==========================================
    CREAR O ACTUALIZAR JUGADOR
@@ -86,13 +107,72 @@ export async function getPlayersRanking(quizId){
     const playersRef = collection(db, "quiz", quizId, "players");
     const rankingQuery = query(playersRef, orderBy("score", "desc"));
     const snapshot = await getDocs(rankingQuery);
+    const currentPlayers = rankingFromSnapshot(snapshot);
 
-    return snapshot.docs.map(
-        item => ({
-            id: item.id,
-            ...item.data()
-        })
+    if (quizId !== "julia") {
+        return currentPlayers;
+    }
+
+    const historicalPlayers = await getUnassignedLegacyRanking();
+    return mergeJuliaHistory(currentPlayers, historicalPlayers);
+}
+
+export async function subscribePlayersRanking(quizId, onUpdate, onError){
+
+    await getPlayerId();
+
+    const playersRef = collection(db, "quiz", quizId, "players");
+    const rankingQuery = query(playersRef, orderBy("score", "desc"));
+    let currentPlayers = [];
+    let historicalPlayers = [];
+    let currentReady = false;
+    let historicalReady = quizId !== "julia";
+
+    const publishRanking = () => {
+        if (!currentReady || !historicalReady) {
+            return;
+        }
+
+        onUpdate(quizId === "julia"
+            ? mergeJuliaHistory(currentPlayers, historicalPlayers)
+            : currentPlayers);
+    };
+
+    const unsubscribeCurrent = onSnapshot(
+        rankingQuery,
+        snapshot => {
+            currentPlayers = rankingFromSnapshot(snapshot);
+            currentReady = true;
+            publishRanking();
+        },
+        onError
     );
+
+    if (quizId !== "julia") {
+        return unsubscribeCurrent;
+    }
+
+    try {
+        const historicalRef = collection(db, "players");
+        const historicalQuery = query(historicalRef, orderBy("score", "desc"));
+        const unsubscribeHistorical = onSnapshot(
+            historicalQuery,
+            snapshot => {
+                historicalPlayers = rankingFromSnapshot(snapshot);
+                historicalReady = true;
+                publishRanking();
+            },
+            onError
+        );
+
+        return () => {
+            unsubscribeCurrent();
+            unsubscribeHistorical();
+        };
+    } catch (error) {
+        unsubscribeCurrent();
+        throw error;
+    }
 }
 
 export async function getUnassignedLegacyRanking(){
@@ -103,11 +183,6 @@ export async function getUnassignedLegacyRanking(){
     const rankingQuery = query(playersRef, orderBy("score", "desc"));
     const snapshot = await getDocs(rankingQuery);
 
-    return snapshot.docs.map(
-        item => ({
-            id: item.id,
-            ...item.data()
-        })
-    );
+    return rankingFromSnapshot(snapshot);
 
 }

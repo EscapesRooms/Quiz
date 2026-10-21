@@ -518,6 +518,57 @@ body {
     margin-top: 20px;
 }
 
+.final-result {
+    margin: 40px auto;
+}
+
+body.has-final-result {
+    align-items: flex-start;
+}
+
+.final-ranking {
+    margin-top: 32px;
+    padding: 24px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, .82);
+    text-align: left;
+}
+
+.final-ranking h2 {
+    margin-bottom: 12px;
+}
+
+.final-ranking p {
+    min-height: 1.25em;
+    color: #cbd5e1;
+}
+
+.final-ranking .continue-btn {
+    margin: 14px 0;
+    padding: 11px 22px;
+}
+
+.final-ranking-table-wrap {
+    overflow-x: auto;
+}
+
+.final-ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.final-ranking-table th,
+.final-ranking-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(148, 163, 184, .35);
+    white-space: nowrap;
+}
+
+.final-ranking-table th {
+    background: rgba(59, 130, 246, .25);
+}
+
 
 /* ==================================================
    RESPONSIVE MÓVIL
