@@ -39,9 +39,29 @@ function renderRanking(players) {
 
 async function loadRanking() {
     try {
-        const players = quizSelect.value === "legacy"
-            ? await getUnassignedLegacyRanking()
-            : await getPlayersRanking(quizSelect.value);
+        let players;
+
+        if (quizSelect.value === "legacy") {
+            players = await getUnassignedLegacyRanking();
+        } else {
+            players = await getPlayersRanking(quizSelect.value);
+
+            if (quizSelect.value === "julia") {
+                const historicalPlayers = await getUnassignedLegacyRanking();
+                const playersById = new Map(
+                    historicalPlayers
+                        .filter(player => player.updatedAt && Number.isFinite(Date.parse(player.updatedAt)))
+                        .map(player => [player.id, player])
+                );
+
+                for (const player of players) {
+                    playersById.set(player.id, player);
+                }
+
+                players = [...playersById.values()].sort((a, b) => b.score - a.score);
+            }
+        }
+
         renderRanking(players);
     }
     catch (error) {
