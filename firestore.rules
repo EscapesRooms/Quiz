@@ -53,5 +53,41 @@ service cloud.firestore {
       allow create, update: if ownsQuizPlayer() && validQuizScore(request.resource.data);
       allow delete: if false;
     }
+
+    match /codigos_acceso/{codeId} {
+      allow get: if true;
+      allow list: if false;
+      allow create, delete: if false;
+      allow update: if resource.data.usado == false
+        && request.resource.data.usado == true
+        && request.resource.data.sesionId is string
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['usado', 'sesionId'])
+        && existsAfter(/databases/$(database)/documents/sesiones_juego/$(request.resource.data.sesionId))
+        && getAfter(/databases/$(database)/documents/sesiones_juego/$(request.resource.data.sesionId)).data.codigoId == codeId
+        && getAfter(/databases/$(database)/documents/sesiones_juego/$(request.resource.data.sesionId)).data.activa == true;
+    }
+
+    match /sesiones_juego/{sessionId} {
+      allow get: if true;
+      allow list, update, delete: if false;
+      allow create: if request.resource.data.keys().hasAll(['activa', 'expiresAt', 'codigoId'])
+        && request.resource.data.keys().hasOnly(['activa', 'expiresAt', 'codigoId'])
+        && request.resource.data.activa == true
+        && request.resource.data.codigoId is string
+        && request.resource.data.expiresAt is timestamp
+        && exists(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId))
+        && get(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId)).data.usado == false
+        && getAfter(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId)).data.usado == true
+        && getAfter(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId)).data.sesionId == sessionId
+        && get(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId)).data.duracionHoras is int
+        && get(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId)).data.duracionHoras > 0
+        && get(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId)).data.duracionHoras <= 720
+        && request.resource.data.expiresAt > request.time
+        && request.resource.data.expiresAt
+          <= request.time + duration.value(
+            get(/databases/$(database)/documents/codigos_acceso/$(request.resource.data.codigoId)).data.duracionHoras,
+            'h'
+          );
+    }
   }
 }
