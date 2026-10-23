@@ -95,14 +95,14 @@ const allQuestions = [
     {
         category: "El Quiz de Montse",
         question: "¿Ultima fiesta que ha ido?",
-        answers: ["Happy Tecnho", "Brunch in the park", "Duro Festival", "Monegros"],
-        correct: 2,
+        answers: ["Blackworks", "Brunch in the park", "Duro Festival", "Monegros"],
+        correct: 0,
         explanation: "La fiesta es su religión.",
         translations: {
             ca: {
                 category: "El Quiz de la Montse",
                 question: "Quina és l'última festa a la qual ha anat?",
-                answers: ["Happy Tecnho", "Brunch in the park", "Duro Festival", "Monegros"],
+                answers: ["Blackworks", "Brunch in the park", "Duro Festival", "Monegros"],
                 explanation: "La festa és la seva religió."
             }
         }
@@ -200,14 +200,14 @@ const allQuestions = [
     {
         category: "El Quiz de Montse",
         question: "¿Con que prefiere dormir?",
-        answers: ["Pijama largo", "Tanga", "Camiseta y pantalon de deporte", "En pelotas"],
-        correct: 3,
+        answers: ["Pijama", "Tanga", "Camiseta y pantalon de deporte", "En pelotas"],
+        correct: 0,
         explanation: "La primera etapa de la educación es fundamental para el desarrollo personal.",
         translations: {
             ca: {
                 category: "El Quiz de la Montse",
                 question: "Amb què prefereix dormir?",
-                answers: ["Pijama llarg", "Tanga", "Samarreta i pantalons d'esport", "Nua"],
+                answers: ["Pijama", "Tanga", "Samarreta i pantalons d'esport", "Nua"],
                 explanation: "La primera etapa de l'educació és fonamental per al desenvolupament personal."
             }
         }
