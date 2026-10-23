@@ -332,7 +332,7 @@ body {
 }
 
 .category::before {
-    content: "★  QUIZ ESPECIAL  ★";
+    content: "★  QUIZ BATTLE  ★";
     display: block;
     margin-bottom: 8px;
     color: #67e8f9;
