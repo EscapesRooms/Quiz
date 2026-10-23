@@ -20,7 +20,7 @@ const allQuestions = [
     {
         category: "El Quiz de Montse",
         question: "¿Como se llama la gata mas veterana de su casa?",
-        answers: ["Alma", "Winny", "Zoe", "Nona"],
+        answers: ["Alma", "Winny", "Zoe", "Minnie"],
         correct: 2,
         explanation: "Una pregunta fácil para quien la conoce y una emboscada para el resto.",
         translations: {
