@@ -1,6 +1,5 @@
-// Cambia este archivo para elegir el banco activo en castellano.
-import { questions as spanishQuestions, quizId as spanishQuizId } from "./questions - Montse.js";
-import { questions as catalanQuestions, quizId as catalanQuizId } from "./questions - Ricard.js";
+// Cambia este import para elegir el banco activo.
+import { questions as activeQuestions, quizId as activeQuizId, defaultLanguage } from "./questions - Montse.js";
 
 const supportedLanguages = ["es", "ca"];
 const requestedLanguage = new URLSearchParams(location.search).get("lang");
@@ -13,8 +12,24 @@ export const language = supportedLanguages.includes(localStorage.getItem("quizLa
     ? localStorage.getItem("quizLanguage")
     : "es";
 
-export const questions = language === "ca" ? catalanQuestions : spanishQuestions;
-export const quizId = language === "ca" ? catalanQuizId : spanishQuizId;
+export const quizId = activeQuizId;
+
+export const questions = activeQuestions.map((question, index) => {
+    const translated = language === defaultLanguage
+        ? question
+        : question.translations?.[language];
+
+    if (!translated) {
+        throw new Error(`Falta la traducción "${language}" de la pregunta ${index + 1} del quiz "${activeQuizId}".`);
+    }
+
+    return {
+        ...translated,
+        correct: question.correct
+    };
+});
+
+window.questions = questions;
 
 export const copy = language === "ca" ? {
     title: "Quiz Battle",

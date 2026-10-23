@@ -4,9 +4,34 @@ El quiz compartido está en `quiz-activo/`. Usa `index.html` para iniciar; allí
 
 ## Cambiar las preguntas
 
-Para elegir las preguntas en castellano, abre `quiz-activo/js/quiz-config.js` y cambia únicamente el archivo del import `spanishQuestions`, por ejemplo, entre `./questions - Julia.js` y `./questions - Montse.js`. No hace falta modificar la lógica del juego ni copiar preguntas a otro archivo. El idioma catalán sigue usando el banco indicado en el import `catalanQuestions`. Cada banco exporta `questions` con la misma estructura (`category`, `question`, `answers` con cuatro opciones, `correct` como índice de 0 a 3 y `explanation`) y un `quizId` estable para separar las puntuaciones.
+El selector de idioma cambia el idioma de la interfaz y de las preguntas del mismo banco. Para elegir otro cuestionario, abre `quiz-activo/js/quiz-config.js` y cambia el archivo del import `activeQuestions` (por ejemplo, `./questions - Julia.js`, `./questions - Montse.js` o `./questions - Ricard.js`). No hay que elegir un banco distinto para cada idioma.
 
-Las traducciones de botones, reglas y resultados también están en `quiz-config.js`. El CSS y la dinámica se comparten entre ambos idiomas. Abre el quiz mediante un servidor local para que el navegador cargue los módulos JavaScript.
+Cada banco debe exportar `questions`, `quizId` y `defaultLanguage` (`"es"` o `"ca"`). Las preguntas mantienen `category`, `question`, `answers` (cuatro opciones), `correct` (índice de 0 a 3) y `explanation` en su idioma predeterminado, y añaden `translations` para el otro idioma con esos mismos campos de texto. Por ejemplo:
+
+```js
+export const quizId = "mi-quiz";
+export const defaultLanguage = "es";
+
+export const questions = [
+    {
+        category: "Mi quiz",
+        question: "¿Cuál es su color favorito?",
+        answers: ["Rojo", "Azul", "Verde", "Amarillo"],
+        correct: 1,
+        explanation: "Una pista.",
+        translations: {
+            ca: {
+                category: "El meu quiz",
+                question: "Quin és el seu color preferit?",
+                answers: ["Vermell", "Blau", "Verd", "Groc"],
+                explanation: "Una pista."
+            }
+        }
+    }
+];
+```
+
+Mantén el mismo orden de respuestas en ambas traducciones y el mismo índice `correct` para que la respuesta acertada no cambie. Cada banco conserva un `quizId` estable para separar las puntuaciones. Los bancos actuales ya incluyen ambos idiomas. Las traducciones de botones, reglas y resultados están en `quiz-config.js`. Abre el quiz mediante un servidor local para que el navegador cargue los módulos JavaScript.
 
 ## Firebase
 
